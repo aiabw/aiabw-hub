@@ -5,5 +5,8 @@
   "scripts": {
     "dev": "echo 'No build required'",
     "start": "echo 'No build required'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.6.1"
   }
 }
