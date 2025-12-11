@@ -6,18 +6,18 @@
     <title>AIABW Hub - AI & Web3 Tools Directory</title>
     <meta name="description" content="Curated directory of AI and Web3 tools. Discover the best tools for trading, development, and opportunities.">
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="src/styles/variables.css">
-    <link rel="stylesheet" href="src/styles/main.css">
+    <!-- Styles - 使用绝对路径 -->
+    <link rel="stylesheet" href="/src/styles/variables.css">
+    <link rel="stylesheet" href="/src/styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
 </head>
 <body>
     <!-- Header -->
@@ -111,6 +111,52 @@
             
             <div id="toolsGrid" class="tools-grid">
                 <!-- 工具卡片会通过JS动态加载 -->
+                <!-- 临时显示几个示例工具 -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Hyperliquid Perpetuals</h3>
+                            <span class="affiliate-badge">OFFER</span>
+                        </div>
+                        <span class="tool-category">Trading</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">High-performance decentralized perpetual contracts exchange with low fees.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">DEX</span>
+                            <span class="tool-tag">Perpetuals</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">2 days ago</span>
+                            <a href="https://hyperliquid.xyz?ref=aiabw" target="_blank" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Virtuals AI Agents</h3>
+                            <span class="affiliate-badge">OFFER</span>
+                        </div>
+                        <span class="tool-category">AI</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Platform to create, discover and interact with AI agents. Early access available.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">AI Agents</span>
+                            <span class="tool-tag">Platform</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">5 days ago</span>
+                            <a href="https://virtuals.io?utm_source=aiabw" target="_blank" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div id="noResults" class="no-results" style="display: none;">
@@ -119,7 +165,7 @@
                 <p data-i18n="no_results_text">Try adjusting your search or filter criteria</p>
             </div>
             
-            <div class="loading" id="loadingIndicator">
+            <div class="loading" id="loadingIndicator" style="display: none;">
                 <div class="spinner"></div>
                 <span data-i18n="loading">Loading tools...</span>
             </div>
@@ -153,9 +199,9 @@
                 <div class="footer-section">
                     <h4 data-i18n="footer_legal">Legal</h4>
                     <ul>
-                        <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
-                        <li><a href="#" data-i18n="footer_terms">Terms of Service</a></li>
-                        <li><a href="#" data-i18n="footer_disclaimer">Disclaimer</a></li>
+                        <li><a href="/privacy" data-i18n="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="/terms" data-i18n="footer_terms">Terms of Service</a></li>
+                        <li><a href="/disclaimer" data-i18n="footer_disclaimer">Disclaimer</a></li>
                     </ul>
                 </div>
             </div>
@@ -170,11 +216,11 @@
         </div>
     </footer>
     
-    <!-- JavaScript -->
-    <script src="src/js/i18n.js"></script>
-    <script src="src/js/dataManager.js"></script>
-    <script src="src/js/search.js"></script>
-    <script src="src/js/filters.js"></script>
-    <script src="src/js/app.js"></script>
+    <!-- JavaScript - 使用绝对路径 -->
+    <script src="/src/js/i18n.js"></script>
+    <script src="/src/js/dataManager.js"></script>
+    <script src="/src/js/search.js"></script>
+    <script src="/src/js/filters.js"></script>
+    <script src="/src/js/app.js"></script>
 </body>
 </html>

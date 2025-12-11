@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Path Test</title>
+</head>
+<body>
+    <h1>Path Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const files = [
+            'src/data/tools_en.json',
+            'src/js/i18n.js',
+            'src/styles/main.css'
+        ];
+        
+        const results = document.getElementById('results');
+        
+        files.forEach(file => {
+            fetch(file)
+                .then(response => {
+                    const status = response.ok ? '✅' : '❌';
+                    results.innerHTML += `<p>${status} ${file} - ${response.status}</p>`;
+                })
+                .catch(error => {
+                    results.innerHTML += `<p>❌ ${file} - ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
