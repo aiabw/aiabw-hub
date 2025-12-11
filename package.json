@@ -1,0 +1,9 @@
+{
+  "name": "aiabw-hub",
+  "version": "1.0.0",
+  "description": "AI & Web3 Tools Directory",
+  "scripts": {
+    "dev": "echo 'No build required'",
+    "start": "echo 'No build required'"
+  }
+}
