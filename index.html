@@ -6,18 +6,799 @@
     <title>AIABW Hub - AI & Web3 Tools Directory</title>
     <meta name="description" content="Curated directory of AI and Web3 tools. Discover the best tools for trading, development, and opportunities.">
     
-    <!-- Styles - 使用绝对路径 -->
-    <link rel="stylesheet" href="/src/styles/variables.css">
-    <link rel="stylesheet" href="/src/styles/main.css">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    
+    <!-- Inline CSS Start -->
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            /* Primary Colors */
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            
+            /* Neutral Colors */
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: rgba(99, 102, 241, 0.1);
+            
+            /* Semantic Colors */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 2rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+        
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color var(--transition-base), color var(--transition-base);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: var(--font-size-xl);
+        }
+        
+        .nav-brand .logo i {
+            color: var(--primary);
+            font-size: var(--font-size-xl);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+            padding: var(--space-sm) 0;
+            position: relative;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--background);
+            border-color: var(--primary-light);
+        }
+        
+        .language-switcher {
+            display: flex;
+            background: var(--background);
+            border-radius: var(--radius-md);
+            padding: 2px;
+            border: 1px solid var(--border);
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background: var(--background);
+            color: var(--text-primary);
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: var(--space-2xl) 0;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .hero-content {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-md);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+            line-height: 1.5;
+        }
+        
+        /* ===== SEARCH ===== */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-sm);
+            transition: border-color var(--transition-fast);
+        }
+        
+        .search-box:focus-within {
+            border-color: white;
+        }
+        
+        .search-box i {
+            color: rgba(255, 255, 255, 0.7);
+            padding: var(--space-sm);
+            font-size: var(--font-size-lg);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: var(--font-size-base);
+            padding: var(--space-sm);
+            background: transparent;
+            color: white;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-box button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: var(--space-sm) var(--space-xl);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+        
+        .search-box button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .search-hint {
+            margin-top: var(--space-sm);
+            font-size: var(--font-size-sm);
+            opacity: 0.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* ===== STATS ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .stat {
+            background: var(--surface);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all var(--transition-base);
+        }
+        
+        .stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+        }
+        
+        /* ===== CATEGORY FILTERS ===== */
+        .section {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .section h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+        
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        
+        .category-btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .category-btn:hover {
+            border-color: var(--primary-light);
+            color: var(--text-primary);
+        }
+        
+        .category-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        #sortSelect {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            outline: none;
+        }
+        
+        #sortSelect:focus {
+            border-color: var(--primary);
+        }
+        
+        /* ===== TOOLS GRID ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .tool-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all var(--transition-base);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow);
+            border-color: var(--primary-light);
+        }
+        
+        .tool-header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        
+        .tool-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+            gap: var(--space-sm);
+        }
+        
+        .tool-title h3 {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            flex: 1;
+            line-height: 1.3;
+        }
+        
+        .affiliate-badge {
+            background: var(--warning);
+            color: #92400e;
+            font-size: var(--font-size-xs);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .tool-category {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+        }
+        
+        .tool-body {
+            padding: var(--space-lg);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+        
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .tool-tag {
+            background: var(--background);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .tool-date {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .visit-btn {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .visit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        /* ===== NO RESULTS ===== */
+        .no-results {
+            text-align: center;
+            padding: var(--space-2xl);
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            margin-bottom: var(--space-md);
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+        
+        .no-results h3 {
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: var(--space-xl);
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--space-md);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ===== CTA SECTION ===== */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            margin-top: var(--space-2xl);
+        }
+        
+        .cta h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-md);
+        }
+        
+        .cta p {
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            transition: all var(--transition-fast);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: var(--space-xl) 0;
+            margin-top: var(--space-2xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-section h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        
+        .footer-section h4 {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+        
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: var(--font-size-lg);
+            transition: color var(--transition-fast);
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .nav-menu {
+                gap: var(--space-md);
+            }
+            
+            .hero h1 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .subtitle {
+                font-size: var(--font-size-base);
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-filters {
+                justify-content: center;
+            }
+            
+            .category-btn {
+                padding: 6px 12px;
+                font-size: var(--font-size-xs);
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .search-box button {
+                width: 100%;
+            }
+        }
+        
+        /* ===== UTILITY CLASSES ===== */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-1 { margin-top: var(--space-sm); }
+        .mt-2 { margin-top: var(--space-md); }
+        .mt-3 { margin-top: var(--space-lg); }
+        .mt-4 { margin-top: var(--space-xl); }
+        
+        .mb-1 { margin-bottom: var(--space-sm); }
+        .mb-2 { margin-bottom: var(--space-md); }
+        .mb-3 { margin-bottom: var(--space-lg); }
+        .mb-4 { margin-bottom: var(--space-xl); }
+    </style>
+    <!-- Inline CSS End -->
 </head>
 <body>
     <!-- Header -->
@@ -32,11 +813,11 @@
                 </div>
                 
                 <div class="nav-menu">
-                    <a href="/" class="nav-link active" data-i18n="nav_home">Home</a>
-                    <a href="#tools" class="nav-link" data-i18n="nav_tools">Tools</a>
-                    <a href="#categories" class="nav-link" data-i18n="nav_categories">Categories</a>
-                    <a href="#airdrop" class="nav-link" data-i18n="nav_airdrop">Airdrops</a>
-                    <a href="mailto:submit@aiabw.com" class="nav-link" data-i18n="nav_submit">Submit</a>
+                    <a href="/" class="nav-link active">Home</a>
+                    <a href="#tools" class="nav-link">Tools</a>
+                    <a href="#categories" class="nav-link">Categories</a>
+                    <a href="#airdrop" class="nav-link">Airdrops</a>
+                    <a href="mailto:submit@aiabw.com" class="nav-link">Submit</a>
                 </div>
                 
                 <div class="nav-actions">
@@ -56,17 +837,17 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1 data-i18n="hero_title">Discover Better AI & Web3 Tools</h1>
-                <p class="subtitle" data-i18n="hero_subtitle">Curated directory of essential tools for trading, development, and opportunities. Updated daily.</p>
+                <h1>Discover Better AI & Web3 Tools</h1>
+                <p class="subtitle">Curated directory of essential tools for trading, development, and opportunities. Updated daily.</p>
                 
                 <!-- Search Box -->
                 <div class="search-container">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search tools by name or category..." data-i18n-placeholder="search_placeholder">
-                        <button id="searchBtn" data-i18n="search_button">Search</button>
+                        <input type="text" id="searchInput" placeholder="Search tools by name or category...">
+                        <button id="searchBtn">Search</button>
                     </div>
-                    <p class="search-hint" data-i18n="search_hint">Try: DEX, AI Agent, Airdrop, Infrastructure</p>
+                    <p class="search-hint">Try: DEX, AI Agent, Airdrop, Infrastructure</p>
                 </div>
             </div>
         </section>
@@ -74,45 +855,49 @@
         <!-- Stats Bar -->
         <section class="stats">
             <div class="stat">
-                <span class="stat-number" id="totalTools">0</span>
-                <span class="stat-label" data-i18n="stat_tools">Tools</span>
+                <span class="stat-number" id="totalTools">8</span>
+                <span class="stat-label">Tools</span>
             </div>
             <div class="stat">
-                <span class="stat-number" id="activeCategories">0</span>
-                <span class="stat-label" data-i18n="stat_categories">Categories</span>
+                <span class="stat-number" id="activeCategories">5</span>
+                <span class="stat-label">Categories</span>
             </div>
             <div class="stat">
-                <span class="stat-number" id="affiliateCount">0</span>
-                <span class="stat-label" data-i18n="stat_affiliates">With Offers</span>
+                <span class="stat-number" id="affiliateCount">4</span>
+                <span class="stat-label">With Offers</span>
             </div>
         </section>
         
         <!-- Category Filters -->
         <section class="section" id="categories">
-            <h2 data-i18n="category_title">Browse by Category</h2>
+            <h2>Browse by Category</h2>
             <div class="category-filters" id="categoryFilters">
-                <!-- 分类按钮会通过JS动态生成 -->
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="trading">Trading</button>
+                <button class="category-btn" data-category="ai">AI</button>
+                <button class="category-btn" data-category="airdrop">Airdrop</button>
+                <button class="category-btn" data-category="wallet">Wallet</button>
+                <button class="category-btn" data-category="data">Data</button>
             </div>
         </section>
         
         <!-- Tools Grid -->
         <section class="section" id="tools">
             <div class="section-header">
-                <h2 data-i18n="tools_title">Featured Tools</h2>
+                <h2>Featured Tools</h2>
                 <div class="sort-controls">
-                    <span data-i18n="sort_by">Sort by:</span>
+                    <span>Sort by:</span>
                     <select id="sortSelect">
-                        <option value="featured" data-i18n="sort_featured">Featured</option>
-                        <option value="name" data-i18n="sort_name">Name A-Z</option>
-                        <option value="newest" data-i18n="sort_newest">Newest</option>
+                        <option value="featured">Featured</option>
+                        <option value="name">Name A-Z</option>
+                        <option value="newest">Newest</option>
                     </select>
                 </div>
             </div>
             
             <div id="toolsGrid" class="tools-grid">
-                <!-- 工具卡片会通过JS动态加载 -->
-                <!-- 临时显示几个示例工具 -->
-                <div class="tool-card">
+                <!-- Tool 1 -->
+                <div class="tool-card" data-category="trading">
                     <div class="tool-header">
                         <div class="tool-title">
                             <h3>Hyperliquid Perpetuals</h3>
@@ -125,17 +910,19 @@
                         <div class="tool-tags">
                             <span class="tool-tag">DEX</span>
                             <span class="tool-tag">Perpetuals</span>
+                            <span class="tool-tag">Trading</span>
                         </div>
                         <div class="tool-footer">
                             <span class="tool-date">2 days ago</span>
-                            <a href="https://hyperliquid.xyz?ref=aiabw" target="_blank" class="visit-btn">
+                            <a href="https://hyperliquid.xyz?ref=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
                                 Visit Tool <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="tool-card">
+                <!-- Tool 2 -->
+                <div class="tool-card" data-category="ai">
                     <div class="tool-header">
                         <div class="tool-title">
                             <h3>Virtuals AI Agents</h3>
@@ -148,10 +935,156 @@
                         <div class="tool-tags">
                             <span class="tool-tag">AI Agents</span>
                             <span class="tool-tag">Platform</span>
+                            <span class="tool-tag">Early Access</span>
                         </div>
                         <div class="tool-footer">
                             <span class="tool-date">5 days ago</span>
-                            <a href="https://virtuals.io?utm_source=aiabw" target="_blank" class="visit-btn">
+                            <a href="https://virtuals.io?utm_source=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 3 -->
+                <div class="tool-card" data-category="trading">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Aark Digital Nomad DEX</h3>
+                            <span class="affiliate-badge">OFFER</span>
+                        </div>
+                        <span class="tool-category">Trading</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Perpetual DEX designed for digital nomads with focus on UX.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">DEX</span>
+                            <span class="tool-tag">Perpetuals</span>
+                            <span class="tool-tag">UX</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">7 days ago</span>
+                            <a href="https://app.aark.digital?ref=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 4 -->
+                <div class="tool-card" data-category="data">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>CoinMarketCap</h3>
+                        </div>
+                        <span class="tool-category">Data</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Track cryptocurrency prices, market cap, and discover new projects.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">Data</span>
+                            <span class="tool-tag">Prices</span>
+                            <span class="tool-tag">Market Cap</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">10 days ago</span>
+                            <a href="https://coinmarketcap.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 5 -->
+                <div class="tool-card" data-category="ai">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Surf Copilot AI</h3>
+                        </div>
+                        <span class="tool-category">AI</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">AI-powered market research assistant for crypto analysis.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">AI</span>
+                            <span class="tool-tag">Research</span>
+                            <span class="tool-tag">Analysis</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">12 days ago</span>
+                            <a href="https://surf.mewtocol.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 6 -->
+                <div class="tool-card" data-category="airdrop">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Galxe Web3 Platform</h3>
+                        </div>
+                        <span class="tool-category">Airdrop</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Essential platform for Web3 tasks, campaigns and airdrop opportunities.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">Airdrop</span>
+                            <span class="tool-tag">Tasks</span>
+                            <span class="tool-tag">Web3</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">15 days ago</span>
+                            <a href="https://galxe.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 7 -->
+                <div class="tool-card" data-category="wallet">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>MetaMask Wallet</h3>
+                        </div>
+                        <span class="tool-category">Wallet</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Popular Ethereum wallet and gateway to blockchain apps.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">Wallet</span>
+                            <span class="tool-tag">Ethereum</span>
+                            <span class="tool-tag">Browser Extension</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">18 days ago</span>
+                            <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 8 -->
+                <div class="tool-card" data-category="data">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Etherscan Explorer</h3>
+                        </div>
+                        <span class="tool-category">Data</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Blockchain explorer and analytics platform for Ethereum.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">Explorer</span>
+                            <span class="tool-tag">Analytics</span>
+                            <span class="tool-tag">Ethereum</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">20 days ago</span>
+                            <a href="https://etherscan.io" target="_blank" rel="noopener noreferrer" class="visit-btn">
                                 Visit Tool <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
@@ -161,21 +1094,16 @@
             
             <div id="noResults" class="no-results" style="display: none;">
                 <i class="fas fa-search fa-2x"></i>
-                <h3 data-i18n="no_results_title">No tools found</h3>
-                <p data-i18n="no_results_text">Try adjusting your search or filter criteria</p>
-            </div>
-            
-            <div class="loading" id="loadingIndicator" style="display: none;">
-                <div class="spinner"></div>
-                <span data-i18n="loading">Loading tools...</span>
+                <h3>No tools found</h3>
+                <p>Try adjusting your search or filter criteria</p>
             </div>
         </section>
         
         <!-- CTA Section -->
         <section class="cta" id="submit">
-            <h2 data-i18n="cta_title">Submit Your Tool</h2>
-            <p data-i18n="cta_text">Have a great tool that should be listed? Let us know!</p>
-            <a href="mailto:submit@aiabw.com?subject=Tool Submission" class="cta-button" data-i18n="cta_button">Submit Tool</a>
+            <h2>Submit Your Tool</h2>
+            <p>Have a great tool that should be listed? Let us know!</p>
+            <a href="mailto:submit@aiabw.com?subject=Tool Submission" class="cta-button">Submit Tool</a>
         </section>
     </main>
     
@@ -185,28 +1113,28 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>AIABW Hub</h3>
-                    <p data-i18n="footer_description">Curated directory of AI and Web3 tools. We help you discover opportunities.</p>
+                    <p>Curated directory of AI and Web3 tools. We help you discover opportunities.</p>
                 </div>
                 <div class="footer-section">
-                    <h4 data-i18n="footer_quick_links">Quick Links</h4>
+                    <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="/" data-i18n="nav_home">Home</a></li>
-                        <li><a href="#tools" data-i18n="nav_tools">Tools</a></li>
-                        <li><a href="#categories" data-i18n="nav_categories">Categories</a></li>
-                        <li><a href="#airdrop" data-i18n="nav_airdrop">Airdrops</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#airdrop">Airdrops</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4 data-i18n="footer_legal">Legal</h4>
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="/privacy" data-i18n="footer_privacy">Privacy Policy</a></li>
-                        <li><a href="/terms" data-i18n="footer_terms">Terms of Service</a></li>
-                        <li><a href="/disclaimer" data-i18n="footer_disclaimer">Disclaimer</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer_copyright">© 2024 AIABW Hub. All rights reserved.</p>
+                <p>© 2024 AIABW Hub. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -216,11 +1144,621 @@
         </div>
     </footer>
     
-    <!-- JavaScript - 使用绝对路径 -->
-    <script src="/src/js/i18n.js"></script>
-    <script src="/src/js/dataManager.js"></script>
-    <script src="/src/js/search.js"></script>
-    <script src="/src/js/filters.js"></script>
-    <script src="/src/js/app.js"></script>
+    <!-- Inline JavaScript Start -->
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        let currentLanguage = 'en';
+        let currentTheme = 'light';
+        let allTools = [];
+        let filteredTools = [];
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+        let searchTerm = '';
+        
+        // ===== TRANSLATION DATA =====
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_tools: "Tools",
+                nav_categories: "Categories",
+                nav_airdrop: "Airdrops",
+                nav_submit: "Submit",
+                hero_title: "Discover Better AI & Web3 Tools",
+                hero_subtitle: "Curated directory of essential tools for trading, development, and opportunities. Updated daily.",
+                search_placeholder: "Search tools by name or category...",
+                search_button: "Search",
+                search_hint: "Try: DEX, AI Agent, Airdrop, Infrastructure",
+                stat_tools: "Tools",
+                stat_categories: "Categories",
+                stat_affiliates: "With Offers",
+                category_title: "Browse by Category",
+                cat_all: "All",
+                cat_trading: "Trading",
+                cat_ai: "AI",
+                cat_airdrop: "Airdrop",
+                cat_infra: "Infrastructure",
+                cat_wallet: "Wallet",
+                cat_data: "Data",
+                tools_title: "Featured Tools",
+                sort_by: "Sort by:",
+                sort_featured: "Featured",
+                sort_name: "Name A-Z",
+                sort_newest: "Newest",
+                affiliate_badge: "OFFER",
+                visit_button: "Visit Tool",
+                days_ago: "days ago",
+                no_results_title: "No tools found",
+                no_results_text: "Try adjusting your search or filter criteria",
+                loading: "Loading tools...",
+                cta_title: "Submit Your Tool",
+                cta_text: "Have a great tool that should be listed? Let us know!",
+                cta_button: "Submit Tool",
+                footer_description: "Curated directory of AI and Web3 tools. We help you discover opportunities.",
+                footer_quick_links: "Quick Links",
+                footer_categories: "Categories",
+                footer_legal: "Legal",
+                footer_disclaimer: "Disclaimer",
+                footer_privacy: "Privacy Policy",
+                footer_terms: "Terms of Service",
+                footer_copyright: "© 2024 AIABW Hub. All rights reserved."
+            },
+            zh: {
+                nav_home: "首页",
+                nav_tools: "工具",
+                nav_categories: "分类",
+                nav_airdrop: "空投",
+                nav_submit: "提交",
+                hero_title: "发现更好的AI与Web3工具",
+                hero_subtitle: "精选的交易、开发和机会工具目录，每日更新。",
+                search_placeholder: "搜索工具名称或分类...",
+                search_button: "搜索",
+                search_hint: "尝试：DEX, AI代理, 空投, 基础设施",
+                stat_tools: "工具",
+                stat_categories: "分类",
+                stat_affiliates: "含福利",
+                category_title: "按分类浏览",
+                cat_all: "全部",
+                cat_trading: "交易",
+                cat_ai: "AI",
+                cat_airdrop: "空投",
+                cat_infra: "基础设施",
+                cat_wallet: "钱包",
+                cat_data: "数据",
+                tools_title: "精选工具",
+                sort_by: "排序:",
+                sort_featured: "推荐",
+                sort_name: "名称A-Z",
+                sort_newest: "最新",
+                affiliate_badge: "推荐",
+                visit_button: "访问工具",
+                days_ago: "天前",
+                no_results_title: "未找到工具",
+                no_results_text: "尝试调整搜索或筛选条件",
+                loading: "加载工具...",
+                cta_title: "提交你的工具",
+                cta_text: "有很棒的工具要推荐？告诉我们！",
+                cta_button: "提交工具",
+                footer_description: "AI和Web3工具精选目录，助您发现机会。",
+                footer_quick_links: "快速链接",
+                footer_categories: "分类",
+                footer_legal: "法律",
+                footer_disclaimer: "免责声明",
+                footer_privacy: "隐私政策",
+                footer_terms: "服务条款",
+                footer_copyright: "© 2024 AIABW Hub 保留所有权利"
+            }
+        };
+        
+        // ===== TOOLS DATA =====
+        const toolsData = {
+            en: [
+                {
+                    "name": "Hyperliquid Perpetuals",
+                    "category": "trading",
+                    "description": "High-performance decentralized perpetual contracts exchange with low fees.",
+                    "link": "https://hyperliquid.xyz?ref=aiabw",
+                    "tags": ["DEX", "Perpetuals", "Trading"],
+                    "dateAdded": "2024-01-15",
+                    "affiliate": true
+                },
+                {
+                    "name": "Virtuals AI Agents",
+                    "category": "ai",
+                    "description": "Platform to create, discover and interact with AI agents. Early access available.",
+                    "link": "https://virtuals.io?utm_source=aiabw",
+                    "tags": ["AI Agents", "Platform", "Early Access"],
+                    "dateAdded": "2024-01-10",
+                    "affiliate": true
+                },
+                {
+                    "name": "CoinMarketCap",
+                    "category": "data",
+                    "description": "Track cryptocurrency prices, market cap, and discover new projects.",
+                    "link": "https://coinmarketcap.com",
+                    "tags": ["Data", "Prices", "Market Cap"],
+                    "dateAdded": "2024-01-05"
+                },
+                {
+                    "name": "Aark Digital Nomad DEX",
+                    "category": "trading",
+                    "description": "Perpetual DEX designed for digital nomads with focus on UX.",
+                    "link": "https://app.aark.digital?ref=aiabw",
+                    "tags": ["DEX", "Perpetuals", "UX"],
+                    "dateAdded": "2024-01-12",
+                    "affiliate": true
+                },
+                {
+                    "name": "Surf Copilot AI",
+                    "category": "ai",
+                    "description": "AI-powered market research assistant for crypto analysis.",
+                    "link": "https://surf.mewtocol.com",
+                    "tags": ["AI", "Research", "Analysis"],
+                    "dateAdded": "2024-01-08"
+                },
+                {
+                    "name": "Galxe Web3 Platform",
+                    "category": "airdrop",
+                    "description": "Essential platform for Web3 tasks, campaigns and airdrop opportunities.",
+                    "link": "https://galxe.com",
+                    "tags": ["Airdrop", "Tasks", "Web3"],
+                    "dateAdded": "2024-01-03"
+                },
+                {
+                    "name": "MetaMask Wallet",
+                    "category": "wallet",
+                    "description": "Popular Ethereum wallet and gateway to blockchain apps.",
+                    "link": "https://metamask.io",
+                    "tags": ["Wallet", "Ethereum", "Browser Extension"],
+                    "dateAdded": "2024-01-01"
+                },
+                {
+                    "name": "Etherscan Explorer",
+                    "category": "data",
+                    "description": "Blockchain explorer and analytics platform for Ethereum.",
+                    "link": "https://etherscan.io",
+                    "tags": ["Explorer", "Analytics", "Ethereum"],
+                    "dateAdded": "2023-12-28"
+                }
+            ],
+            zh: [
+                {
+                    "name": "Hyperliquid 永续合约",
+                    "category": "trading",
+                    "description": "高性能去中心化永续合约交易所，手续费低。",
+                    "link": "https://hyperliquid.xyz?ref=aiabw",
+                    "tags": ["DEX", "永续合约", "交易"],
+                    "dateAdded": "2024-01-15",
+                    "affiliate": true
+                },
+                {
+                    "name": "Virtuals AI 代理平台",
+                    "category": "ai",
+                    "description": "创建、发现和与AI代理交互的平台。提供早期访问。",
+                    "link": "https://virtuals.io?utm_source=aiabw",
+                    "tags": ["AI代理", "平台", "早期访问"],
+                    "dateAdded": "2024-01-10",
+                    "affiliate": true
+                },
+                {
+                    "name": "CoinMarketCap 行情",
+                    "category": "data",
+                    "description": "追踪加密货币价格、市值，发现新项目。",
+                    "link": "https://coinmarketcap.com",
+                    "tags": ["数据", "价格", "市值"],
+                    "dateAdded": "2024-01-05"
+                },
+                {
+                    "name": "Aark 数字游民DEX",
+                    "category": "trading",
+                    "description": "专为数字游民设计的永续DEX，注重用户体验。",
+                    "link": "https://app.aark.digital?ref=aiabw",
+                    "tags": ["DEX", "永续合约", "用户体验"],
+                    "dateAdded": "2024-01-12",
+                    "affiliate": true
+                },
+                {
+                    "name": "Surf Copilot AI助手",
+                    "category": "ai",
+                    "description": "AI驱动的市场研究助手，用于加密货币分析。",
+                    "link": "https://surf.mewtocol.com",
+                    "tags": ["AI", "研究", "分析"],
+                    "dateAdded": "2024-01-08"
+                },
+                {
+                    "name": "Galxe Web3 平台",
+                    "category": "airdrop",
+                    "description": "参与Web3任务、活动和空投机会的必备平台。",
+                    "link": "https://galxe.com",
+                    "tags": ["空投", "任务", "Web3"],
+                    "dateAdded": "2024-01-03"
+                },
+                {
+                    "name": "MetaMask 钱包",
+                    "category": "wallet",
+                    "description": "流行的以太坊钱包和区块链应用网关。",
+                    "link": "https://metamask.io",
+                    "tags": ["钱包", "以太坊", "浏览器扩展"],
+                    "dateAdded": "2024-01-01"
+                },
+                {
+                    "name": "Etherscan 区块浏览器",
+                    "category": "data",
+                    "description": "以太坊区块链浏览器和分析平台。",
+                    "link": "https://etherscan.io",
+                    "tags": ["浏览器", "分析", "以太坊"],
+                    "dateAdded": "2023-12-28"
+                }
+            ]
+        };
+        
+        // ===== UTILITY FUNCTIONS =====
+        function t(key) {
+            return translations[currentLanguage][key] || key;
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return `${diffDays} ${t('days_ago')}`;
+        }
+        
+        function updateStats() {
+            const categories = new Set(allTools.map(tool => tool.category));
+            const affiliateTools = allTools.filter(tool => 
+                tool.link.includes('?ref=') || 
+                tool.link.includes('?utm_source=') || 
+                tool.affiliate === true
+            ).length;
+            
+            document.getElementById('totalTools').textContent = allTools.length;
+            document.getElementById('activeCategories').textContent = categories.size;
+            document.getElementById('affiliateCount').textContent = affiliateTools;
+        }
+        
+        // ===== FILTER AND SORT FUNCTIONS =====
+        function filterTools() {
+            filteredTools = allTools.filter(tool => {
+                // Category filter
+                const categoryMatch = currentCategory === 'all' || tool.category === currentCategory;
+                
+                // Search filter
+                const searchMatch = searchTerm === '' || 
+                    tool.name.toLowerCase().includes(searchTerm) ||
+                    tool.description.toLowerCase().includes(searchTerm) ||
+                    (tool.tags && tool.tags.some(tag => 
+                        tag.toLowerCase().includes(searchTerm)
+                    )) ||
+                    tool.category.toLowerCase().includes(searchTerm);
+                
+                return categoryMatch && searchMatch;
+            });
+            
+            sortTools();
+            renderTools();
+        }
+        
+        function sortTools() {
+            switch (currentSort) {
+                case 'name':
+                    filteredTools.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                    
+                case 'newest':
+                    filteredTools.sort((a, b) => 
+                        new Date(b.dateAdded) - new Date(a.dateAdded)
+                    );
+                    break;
+                    
+                case 'featured':
+                default:
+                    filteredTools.sort((a, b) => {
+                        const aIsAffiliate = a.link.includes('?ref=') || a.affiliate === true;
+                        const bIsAffiliate = b.link.includes('?ref=') || b.affiliate === true;
+                        
+                        if (aIsAffiliate && !bIsAffiliate) return -1;
+                        if (!aIsAffiliate && bIsAffiliate) return 1;
+                        
+                        return new Date(b.dateAdded) - new Date(a.dateAdded);
+                    });
+                    break;
+            }
+        }
+        
+        // ===== RENDER FUNCTIONS =====
+        function renderTools() {
+            const container = document.getElementById('toolsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredTools.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            const toolsHTML = filteredTools.map(tool => {
+                const isAffiliate = tool.link.includes('?ref=') || 
+                                   tool.link.includes('?utm_source=') || 
+                                   tool.affiliate === true;
+                
+                const categoryKey = `cat_${tool.category}`;
+                const categoryDisplay = t(categoryKey) || tool.category;
+                
+                return `
+                <div class="tool-card" data-category="${tool.category}">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>${tool.name}</h3>
+                            ${isAffiliate ? `<span class="affiliate-badge">${t('affiliate_badge')}</span>` : ''}
+                        </div>
+                        <span class="tool-category">${categoryDisplay}</span>
+                    </div>
+                    
+                    <div class="tool-body">
+                        <p class="tool-description">${tool.description}</p>
+                        
+                        ${tool.tags && tool.tags.length > 0 ? `
+                        <div class="tool-tags">
+                            ${tool.tags.slice(0, 4).map(tag => 
+                                `<span class="tool-tag">${tag}</span>`
+                            ).join('')}
+                        </div>
+                        ` : ''}
+                        
+                        <div class="tool-footer">
+                            <span class="tool-date">${formatDate(tool.dateAdded)}</span>
+                            <a href="${tool.link}" target="_blank" rel="noopener noreferrer" 
+                               class="visit-btn">
+                                ${t('visit_button')}
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = toolsHTML;
+        }
+        
+        function updatePageText() {
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[currentLanguage][key]) {
+                    element.placeholder = translations[currentLanguage][key];
+                }
+            });
+            
+            // Update select options
+            document.querySelectorAll('option[data-i18n]').forEach(option => {
+                const key = option.getAttribute('data-i18n');
+                if (translations[currentLanguage][key]) {
+                    option.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Update category buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                const category = btn.getAttribute('data-category');
+                if (category === 'all') {
+                    btn.textContent = t('cat_all');
+                } else {
+                    const categoryKey = `cat_${category}`;
+                    btn.textContent = t(categoryKey) || category;
+                }
+            });
+        }
+        
+        // ===== LANGUAGE FUNCTIONS =====
+        function switchLanguage(lang) {
+            if (!translations[lang]) return;
+            
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            localStorage.setItem('aiabw_language', lang);
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Load tools for new language
+            allTools = toolsData[lang] || toolsData.en;
+            filterTools();
+            updateStats();
+            updatePageText();
+        }
+        
+        // ===== THEME FUNCTIONS =====
+        function initTheme() {
+            const savedTheme = localStorage.getItem('aiabw_theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                currentTheme = savedTheme;
+            } else if (prefersDark) {
+                currentTheme = 'dark';
+            }
+            
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeIcon();
+        }
+        
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('aiabw_theme', currentTheme);
+            updateThemeIcon();
+        }
+        
+        function updateThemeIcon() {
+            const themeToggle = document.getElementById('themeToggle');
+            if (!themeToggle) return;
+            
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+        
+        // ===== SEARCH FUNCTION =====
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchTerm = searchInput.value.toLowerCase();
+                filterTools();
+            }
+        }
+        
+        // ===== INITIALIZATION =====
+        function init() {
+            console.log('🚀 AIABW Hub Initializing...');
+            
+            // 1. Initialize theme
+            initTheme();
+            
+            // 2. Initialize language
+            const savedLang = localStorage.getItem('aiabw_language') || 'en';
+            switchLanguage(savedLang);
+            
+            // 3. Initialize tools
+            allTools = toolsData[currentLanguage] || toolsData.en;
+            filteredTools = [...allTools];
+            filterTools();
+            updateStats();
+            
+            // 4. Set up event listeners
+            setupEventListeners();
+            
+            console.log('✅ AIABW Hub Ready!');
+        }
+        
+        function setupEventListeners() {
+            // Language switcher
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Search
+            const searchBtn = document.getElementById('searchBtn');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (searchBtn) {
+                searchBtn.addEventListener('click', performSearch);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+                
+                // Debounced search
+                let debounceTimer;
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        searchTerm = e.target.value.toLowerCase();
+                        filterTools();
+                    }, 300);
+                });
+            }
+            
+            // Category filters
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    document.querySelectorAll('.category-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    
+                    // Filter tools
+                    currentCategory = btn.getAttribute('data-category');
+                    filterTools();
+                });
+            });
+            
+            // Sort select
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', (e) => {
+                    currentSort = e.target.value;
+                    sortTools();
+                    renderTools();
+                });
+            }
+            
+            // Navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+            
+            // Track outbound clicks
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.visit-btn')) {
+                    const url = e.target.closest('.visit-btn').href;
+                    console.log('Outbound click tracked:', url);
+                    
+                    // You can add analytics here
+                    // Example: Google Analytics 4
+                    // if (typeof gtag !== 'undefined') {
+                    //     gtag('event', 'outbound_click', {
+                    //         'event_category': 'Tool',
+                    //         'event_label': url
+                    //     });
+                    // }
+                    
+                    // Save to localStorage for analytics
+                    const clicks = JSON.parse(localStorage.getItem('aiabw_clicks') || '[]');
+                    clicks.push({
+                        url: url,
+                        timestamp: new Date().toISOString(),
+                        language: currentLanguage
+                    });
+                    localStorage.setItem('aiabw_clicks', JSON.stringify(clicks.slice(-100)));
+                }
+            });
+        }
+        
+        // ===== START THE APPLICATION =====
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <!-- Inline JavaScript End -->
 </body>
 </html>

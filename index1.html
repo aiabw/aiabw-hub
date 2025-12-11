@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIABW Hub - AI & Web3 Tools Directory</title>
+    <meta name="description" content="Curated directory of AI and Web3 tools. Discover the best tools for trading, development, and opportunities.">
+    
+    <!-- Styles - 使用绝对路径 -->
+    <link rel="stylesheet" href="/src/styles/variables.css">
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="/" class="logo">
+                        <i class="fas fa-robot"></i>
+                        <span>AIABW Hub</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu">
+                    <a href="/" class="nav-link active" data-i18n="nav_home">Home</a>
+                    <a href="#tools" class="nav-link" data-i18n="nav_tools">Tools</a>
+                    <a href="#categories" class="nav-link" data-i18n="nav_categories">Categories</a>
+                    <a href="#airdrop" class="nav-link" data-i18n="nav_airdrop">Airdrops</a>
+                    <a href="mailto:submit@aiabw.com" class="nav-link" data-i18n="nav_submit">Submit</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="zh">中文</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 data-i18n="hero_title">Discover Better AI & Web3 Tools</h1>
+                <p class="subtitle" data-i18n="hero_subtitle">Curated directory of essential tools for trading, development, and opportunities. Updated daily.</p>
+                
+                <!-- Search Box -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search tools by name or category..." data-i18n-placeholder="search_placeholder">
+                        <button id="searchBtn" data-i18n="search_button">Search</button>
+                    </div>
+                    <p class="search-hint" data-i18n="search_hint">Try: DEX, AI Agent, Airdrop, Infrastructure</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Bar -->
+        <section class="stats">
+            <div class="stat">
+                <span class="stat-number" id="totalTools">0</span>
+                <span class="stat-label" data-i18n="stat_tools">Tools</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="activeCategories">0</span>
+                <span class="stat-label" data-i18n="stat_categories">Categories</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="affiliateCount">0</span>
+                <span class="stat-label" data-i18n="stat_affiliates">With Offers</span>
+            </div>
+        </section>
+        
+        <!-- Category Filters -->
+        <section class="section" id="categories">
+            <h2 data-i18n="category_title">Browse by Category</h2>
+            <div class="category-filters" id="categoryFilters">
+                <!-- 分类按钮会通过JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- Tools Grid -->
+        <section class="section" id="tools">
+            <div class="section-header">
+                <h2 data-i18n="tools_title">Featured Tools</h2>
+                <div class="sort-controls">
+                    <span data-i18n="sort_by">Sort by:</span>
+                    <select id="sortSelect">
+                        <option value="featured" data-i18n="sort_featured">Featured</option>
+                        <option value="name" data-i18n="sort_name">Name A-Z</option>
+                        <option value="newest" data-i18n="sort_newest">Newest</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="toolsGrid" class="tools-grid">
+                <!-- 工具卡片会通过JS动态加载 -->
+                <!-- 临时显示几个示例工具 -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Hyperliquid Perpetuals</h3>
+                            <span class="affiliate-badge">OFFER</span>
+                        </div>
+                        <span class="tool-category">Trading</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">High-performance decentralized perpetual contracts exchange with low fees.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">DEX</span>
+                            <span class="tool-tag">Perpetuals</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">2 days ago</span>
+                            <a href="https://hyperliquid.xyz?ref=aiabw" target="_blank" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-title">
+                            <h3>Virtuals AI Agents</h3>
+                            <span class="affiliate-badge">OFFER</span>
+                        </div>
+                        <span class="tool-category">AI</span>
+                    </div>
+                    <div class="tool-body">
+                        <p class="tool-description">Platform to create, discover and interact with AI agents. Early access available.</p>
+                        <div class="tool-tags">
+                            <span class="tool-tag">AI Agents</span>
+                            <span class="tool-tag">Platform</span>
+                        </div>
+                        <div class="tool-footer">
+                            <span class="tool-date">5 days ago</span>
+                            <a href="https://virtuals.io?utm_source=aiabw" target="_blank" class="visit-btn">
+                                Visit Tool <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search fa-2x"></i>
+                <h3 data-i18n="no_results_title">No tools found</h3>
+                <p data-i18n="no_results_text">Try adjusting your search or filter criteria</p>
+            </div>
+            
+            <div class="loading" id="loadingIndicator" style="display: none;">
+                <div class="spinner"></div>
+                <span data-i18n="loading">Loading tools...</span>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta" id="submit">
+            <h2 data-i18n="cta_title">Submit Your Tool</h2>
+            <p data-i18n="cta_text">Have a great tool that should be listed? Let us know!</p>
+            <a href="mailto:submit@aiabw.com?subject=Tool Submission" class="cta-button" data-i18n="cta_button">Submit Tool</a>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AIABW Hub</h3>
+                    <p data-i18n="footer_description">Curated directory of AI and Web3 tools. We help you discover opportunities.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer_quick_links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/" data-i18n="nav_home">Home</a></li>
+                        <li><a href="#tools" data-i18n="nav_tools">Tools</a></li>
+                        <li><a href="#categories" data-i18n="nav_categories">Categories</a></li>
+                        <li><a href="#airdrop" data-i18n="nav_airdrop">Airdrops</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer_legal">Legal</h4>
+                    <ul>
+                        <li><a href="/privacy" data-i18n="footer_privacy">Privacy Policy</a></li>
+                        <li><a href="/terms" data-i18n="footer_terms">Terms of Service</a></li>
+                        <li><a href="/disclaimer" data-i18n="footer_disclaimer">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer_copyright">© 2024 AIABW Hub. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript - 使用绝对路径 -->
+    <script src="/src/js/i18n.js"></script>
+    <script src="/src/js/dataManager.js"></script>
+    <script src="/src/js/search.js"></script>
+    <script src="/src/js/filters.js"></script>
+    <script src="/src/js/app.js"></script>
+</body>
+</html>
