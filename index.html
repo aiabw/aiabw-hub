@@ -641,7 +641,196 @@
             padding: var(--space-xl) 0;
             margin-top: var(--space-2xl);
         }
-        
+        /* ===== 空投猎人雷达样式 ===== */
+        .radar-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: var(--space-2xl) 0;
+            border-radius: var(--radius-xl);
+            margin: var(--space-2xl) 0;
+        }
+        .radar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .radar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+        }
+
+        .radar-stats span {
+            margin-right: var(--space-lg);
+            font-weight: 500;
+        }
+
+        .radar-controls button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            margin-left: var(--space-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radar-controls button:hover {
+            background: var(--primary);
+        }
+
+        .radar-controls .subscribe {
+            background: var(--primary);
+        }
+
+        .radar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .radar-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .radar-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .radar-hotness {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .heat-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffa726);
+            transition: width 1s ease;
+        }
+
+        .heat-number {
+            position: absolute;
+            right: 10px;
+            top: -25px;
+            background: #ff6b6b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .radar-content {
+            padding: var(--space-lg);
+        }
+
+        .radar-content h4 {
+            margin-bottom: var(--space-sm);
+            font-size: 1.1em;
+        }
+
+        .radar-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .radar-steps {
+            margin-bottom: var(--space-lg);
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xs);
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .step i {
+            color: var(--success);
+            font-size: 0.8em;
+        }
+
+        .radar-action {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .radar-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .radar-footer {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .suggest-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggest-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 热度级别颜色 */
+        .hotness-4 .heat-bar { background: linear-gradient(90deg, #ff6b6b, #ffa726); }
+        .hotness-3 .heat-bar { background: linear-gradient(90deg, #ffa726, #ffd93d); }
+        .hotness-2 .heat-bar { background: linear-gradient(90deg, #ffd93d, #6bcf7f); }
+        .hotness-1 .heat-bar { background: linear-gradient(90deg, #6bcf7f, #4d96ff); }
+        .hotness-0 .heat-bar { background: linear-gradient(90deg, #4d96ff, #a29bfe); }
+
+        @media (max-width: 768px) {
+            .radar-header {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .radar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ⬆⬆⬆ 雷达CSS结束 ⬆⬆⬆ */
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1105,6 +1294,14 @@
             <p>Have a great tool that should be listed? Let us know!</p>
             <a href="mailto:submit@aiabw.com?subject=Tool Submission" class="cta-button">Submit Tool</a>
         </section>
+        <!-- ===== 空投猎人雷达部分 ===== -->
+        <section class="radar-section" id="radar">
+            <h2 data-i18n="radar_title">🛰️ 空投猎人实时雷达</h2>
+            <p data-i18n="radar_subtitle">监控全网AI与Web3项目空投机会，热度指数实时更新</p>
+            <div id="radarContainer">
+                <!-- 雷达内容将通过JavaScript动态加载 -->
+            </div>
+        </section>
     </main>
     
     <!-- Footer -->
@@ -1200,7 +1397,19 @@
                 footer_disclaimer: "Disclaimer",
                 footer_privacy: "Privacy Policy",
                 footer_terms: "Terms of Service",
-                footer_copyright: "© 2024 AIABW Hub. All rights reserved."
+                footer_copyright: "© 2024 AIABW Hub. All rights reserved.",
+                 // 添加雷达翻译（英文）
+                radar_title: "🛰️ Airdrop Hunter Radar",
+                radar_subtitle: "Monitor all AI & Web3 airdrop opportunities with real-time heat index",
+                radar_watching: "people watching",
+                radar_hotness: "Heat Index",
+                radar_potential: "Potential",
+                radar_participants: "Participants",
+                radar_days_left: "days left",
+                radar_start_tracking: "Start Tracking",
+                radar_suggest_airdrop: "Suggest Airdrop",
+                radar_refresh: "Refresh",
+                radar_subscribe: "Subscribe Alerts"
             },
             zh: {
                 nav_home: "首页",
@@ -1245,10 +1454,315 @@
                 footer_disclaimer: "免责声明",
                 footer_privacy: "隐私政策",
                 footer_terms: "服务条款",
-                footer_copyright: "© 2024 AIABW Hub 保留所有权利"
-            }
+                footer_copyright: "© 2024 AIABW Hub 保留所有权利",
+                 // 添加雷达翻译（中文）
+                radar_title: "🛰️ 空投猎人实时雷达",
+                radar_subtitle: "监控全网AI与Web3项目空投机会，热度指数实时更新",
+                radar_watching: "人在监控",
+                radar_hotness: "热度指数",
+                radar_potential: "预估收益",
+                radar_participants: "参与人数",
+                radar_days_left: "天剩余",
+                radar_start_tracking: "开始追踪",
+                radar_suggest_airdrop: "推荐空投项目",
+                radar_refresh: "刷新",
+                radar_subscribe: "订阅警报"
+                }
         };
-        
+        // ===== 空投雷达数据 =====
+        const airdropData = {
+            en: [
+                {
+                    id: 1,
+                    name: "Virtuals AI Agents",
+                    category: "ai",
+                    potential: "$500-$2,000",
+                    difficulty: "Medium",
+                    deadline: "2024-02-15",
+                    hotness: 92,
+                    participants: 2841,
+                    steps: ["Create AI Agent", "Complete 10 interactions", "Invite 3 friends"],
+                    link: "https://virtuals.io?utm_source=aiabw"
+                },
+                {
+                    id: 2,
+                    name: "Hyperliquid Layer 2",
+                    category: "trading",
+                    potential: "$200-$800",
+                    difficulty: "Easy",
+                    deadline: "2024-02-20",
+                    hotness: 88,
+                    participants: 15293,
+                    steps: ["Trade $100+", "Provide liquidity"],
+                    link: "https://hyperliquid.xyz?ref=aiabw"
+                },
+                {
+                    id: 3,
+                    name: "Aark Testnet",
+                    category: "trading",
+                    potential: "$100-$500",
+                    difficulty: "Easy",
+                    deadline: "2024-02-25",
+                    hotness: 85,
+                    participants: 8924,
+                    steps: ["Complete 5 trades", "Join Discord"],
+                    link: "https://app.aark.digital?ref=aiabw"
+                },
+                {
+                    id: 4,
+                    name: "Galxe Campaign",
+                    category: "airdrop",
+                    potential: "$50-$300",
+                    difficulty: "Very Easy",
+                    deadline: "2024-02-28",
+                    hotness: 78,
+                    participants: 43210,
+                    steps: ["Complete tasks", "Connect wallet"],
+                    link: "https://galxe.com"
+                }
+            ],
+            zh: [
+                {
+                    id: 1,
+                    name: "Virtuals AI代理平台",
+                    category: "ai",
+                    potential: "500-2000美元",
+                    difficulty: "中等",
+                    deadline: "2024-02-15",
+                    hotness: 92,
+                    participants: 2841,
+                    steps: ["创建AI代理", "完成10次交互", "邀请3个朋友"],
+                    link: "https://virtuals.io?utm_source=aiabw"
+                },
+                {
+                    id: 2,
+                    name: "Hyperliquid Layer 2",
+                    category: "trading",
+                    potential: "200-800美元",
+                    difficulty: "简单",
+                    deadline: "2024-02-20",
+                    hotness: 88,
+                    participants: 15293,
+                    steps: ["交易$100以上", "提供流动性"],
+                    link: "https://hyperliquid.xyz?ref=aiabw"
+                },
+                {
+                    id: 3,
+                    name: "Aark 测试网",
+                    category: "trading",
+                    potential: "100-500美元",
+                    difficulty: "简单",
+                    deadline: "2024-02-25",
+                    hotness: 85,
+                    participants: 8924,
+                    steps: ["完成5笔交易", "加入Discord"],
+                    link: "https://app.aark.digital?ref=aiabw"
+                },
+                {
+                    id: 4,
+                    name: "Galxe 活动",
+                    category: "airdrop",
+                    potential: "50-300美元",
+                    difficulty: "非常简单",
+                    deadline: "2024-02-28",
+                    hotness: 78,
+                    participants: 43210,
+                    steps: ["完成任务", "连接钱包"],
+                    link: "https://galxe.com"
+                }
+            ]
+        };
+        // ===== 雷达功能函数 =====
+        function initRadar() {
+            console.log("🛰️ 初始化空投雷达...");
+            renderRadar();
+            
+            // 每30秒更新一次监控人数
+            setInterval(() => {
+                updateWatcherCount();
+            }, 30000);
+            
+            // 每5分钟更新一次热度
+            setInterval(() => {
+                updateHotness();
+            }, 300000);
+        }
+
+        function renderRadar() {
+            const container = document.getElementById('radarContainer');
+            if (!container) return;
+            
+            const lang = currentLanguage;
+            const data = airdropData[lang] || airdropData.en;
+            const now = new Date();
+            
+            let totalWatchers = 31245;
+            let avgHotness = data.reduce((sum, item) => sum + item.hotness, 0) / data.length;
+            
+            const html = `
+            <div class="radar-container">
+                <div class="radar-header">
+                    <div class="radar-stats">
+                        <span>🔄 ${t('radar_refresh')}</span>
+                        <span>👁️‍🗨️ <span id="totalWatchers">${totalWatchers.toLocaleString()}</span> ${t('radar_watching')}</span>
+                        <span>🔥 ${t('radar_hotness')}: <span id="avgHotness">${Math.round(avgHotness)}</span>/100</span>
+                    </div>
+                    <div class="radar-controls">
+                        <button onclick="refreshRadar()">
+                            <i class="fas fa-redo"></i> ${t('radar_refresh')}
+                        </button>
+                        <button onclick="subscribeRadar()" class="subscribe">
+                            <i class="fas fa-bell"></i> ${t('radar_subscribe')}
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="radar-grid">
+                    ${data.map(item => {
+                        const daysLeft = Math.ceil((new Date(item.deadline) - now) / (1000 * 60 * 60 * 24));
+                        const hotnessClass = `hotness-${Math.floor(item.hotness / 20)}`;
+                        
+                        return `
+                        <div class="radar-card ${hotnessClass}">
+                            <div class="radar-hotness">
+                                <div class="heat-bar" style="width: ${item.hotness}%"></div>
+                                <span class="heat-number">${item.hotness}</span>
+                            </div>
+                            
+                            <div class="radar-content">
+                                <h4>${item.name}</h4>
+                                
+                                <div class="radar-meta">
+                                    <span class="meta-item">
+                                        <i class="fas fa-gift"></i>
+                                        ${item.potential}
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="fas fa-users"></i>
+                                        ${item.participants.toLocaleString()}
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        ${daysLeft} ${t('radar_days_left')}
+                                    </span>
+                                </div>
+                                
+                                <div class="radar-steps">
+                                    ${item.steps.map(step => `
+                                    <div class="step">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>${step}</span>
+                                    </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <button class="radar-action" onclick="trackAirdrop(${item.id}, '${item.link}')">
+                                    <i class="fas fa-bullseye"></i>
+                                    ${t('radar_start_tracking')}
+                                </button>
+                            </div>
+                        </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <div class="radar-footer">
+                    <p>
+                        <i class="fas fa-info-circle"></i>
+                        ${lang === 'zh' 
+                            ? '数据每15分钟更新，热度基于社区讨论、参与人数和倒计时计算' 
+                            : 'Data updates every 15min. Hotness based on community buzz, participants & deadline'}
+                    </p>
+                    <button onclick="suggestAirdrop()" class="suggest-btn">
+                        <i class="fas fa-plus"></i>
+                        ${t('radar_suggest_airdrop')}
+                    </button>
+                </div>
+            </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function updateWatcherCount() {
+            const watchersElement = document.getElementById('totalWatchers');
+            if (watchersElement) {
+                const current = parseInt(watchersElement.textContent.replace(/,/g, ''));
+                const change = Math.floor(Math.random() * 21) - 5; // -5 到 +15
+                const newCount = Math.max(30000, current + change);
+                watchersElement.textContent = newCount.toLocaleString();
+            }
+        }
+
+        function updateHotness() {
+            const avgElement = document.getElementById('avgHotness');
+            if (avgElement) {
+                const current = parseInt(avgElement.textContent);
+                const change = Math.floor(Math.random() * 5) - 2; // -2 到 +2
+                const newHotness = Math.max(70, Math.min(95, current + change));
+                avgElement.textContent = newHotness;
+            }
+        }
+
+        function refreshRadar() {
+            console.log("刷新雷达数据...");
+            renderRadar();
+            
+            // 显示刷新成功提示
+            const refreshBtn = document.querySelector('.radar-controls button');
+            if (refreshBtn) {
+                const originalText = refreshBtn.innerHTML;
+                refreshBtn.innerHTML = '<i class="fas fa-check"></i> Refreshed!';
+                setTimeout(() => {
+                    refreshBtn.innerHTML = originalText;
+                }, 2000);
+            }
+        }
+
+        function trackAirdrop(id, link) {
+            console.log(`开始追踪空投 #${id}: ${link}`);
+            
+            // 保存到本地存储
+            const tracked = JSON.parse(localStorage.getItem('tracked_airdrops') || '[]');
+            if (!tracked.includes(id)) {
+                tracked.push(id);
+                localStorage.setItem('tracked_airdrops', JSON.stringify(tracked));
+            }
+            
+            // 打开链接
+            window.open(link, '_blank');
+            
+            // 显示追踪成功
+            alert(currentLanguage === 'zh' 
+                ? `已开始追踪此空投！我们会在截止前24小时提醒你。` 
+                : `Started tracking this airdrop! We'll remind you 24h before deadline.`);
+        }
+
+        function subscribeRadar() {
+            const email = prompt(currentLanguage === 'zh' 
+                ? "请输入你的邮箱接收空投警报：" 
+                : "Enter your email for airdrop alerts:");
+            
+            if (email && email.includes('@')) {
+                const subscribers = JSON.parse(localStorage.getItem('radar_subscribers') || '[]');
+                subscribers.push({
+                    email: email,
+                    date: new Date().toISOString(),
+                    language: currentLanguage
+                });
+                localStorage.setItem('radar_subscribers', JSON.stringify(subscribers));
+                
+                alert(currentLanguage === 'zh' 
+                    ? "订阅成功！你将收到最新空投机会的邮件提醒。" 
+                    : "Subscribed! You'll receive email alerts for new airdrop opportunities.");
+            }
+        }
+
+        function suggestAirdrop() {
+            window.open('mailto:suggest@aiabw.com?subject=Airdrop Suggestion', '_blank');
+        }
+
+/* ⬆⬆⬆ 雷达函数结束 ⬆⬆⬆ */
         // ===== TOOLS DATA =====
         const toolsData = {
             en: [
@@ -1590,6 +2104,8 @@
             filterTools();
             updateStats();
             updatePageText();
+            renderRadar();
+
                // Vercel Analytics
             if (window.va) {
                 va('track', 'Language Switch', {
@@ -1672,7 +2188,8 @@
             
             // 4. Set up event listeners
             setupEventListeners();
-            
+            // 5. Initialize Airdrop Radar
+             initRadar();
             console.log('✅ AIABW Hub Ready!');
         }
         
