@@ -1552,6 +1552,13 @@
             // Update category buttons
             document.querySelectorAll('.category-btn').forEach(btn => {
                 const category = btn.getAttribute('data-category');
+                // Vercel Analytics
+                if (window.va) {
+                    va('track', 'Category Filter', {
+                        category: category,
+                        language: currentLanguage
+                    });
+                }
                 if (category === 'all') {
                     btn.textContent = t('cat_all');
                 } else {
@@ -1583,6 +1590,13 @@
             filterTools();
             updateStats();
             updatePageText();
+               // Vercel Analytics
+            if (window.va) {
+                va('track', 'Language Switch', {
+                    from: currentLanguage,
+                    to: lang
+                });
+            }
         }
         
         // ===== THEME FUNCTIONS =====
@@ -1622,6 +1636,13 @@
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchTerm = searchInput.value.toLowerCase();
+                // Vercel Analytics
+            if (window.va && searchTerm) {
+                va('track', 'Search', {
+                    query: searchTerm,
+                    results: filteredTools.length
+                });
+            }
                 filterTools();
             }
         }
@@ -1629,7 +1650,13 @@
         // ===== INITIALIZATION =====
         function init() {
             console.log('🚀 AIABW Hub Initializing...');
-            
+            // 发送页面浏览事件到Vercel Analytics
+            if (window.va) {
+                va('track', 'Page View', {
+                    page: window.location.pathname,
+                    language: currentLanguage
+                });
+            }
             // 1. Initialize theme
             initTheme();
             
@@ -1743,7 +1770,14 @@
                     //         'event_label': url
                     //     });
                     // }
-                    
+                    // 添加Vercel Analytics追踪
+                    if (window.va) {
+                        va('track', 'Outbound Click', {
+                            url: url,
+                            category: 'Tool Click',
+                            language: currentLanguage
+                        });
+                    }
                     // Save to localStorage for analytics
                     const clicks = JSON.parse(localStorage.getItem('aiabw_clicks') || '[]');
                     clicks.push({
