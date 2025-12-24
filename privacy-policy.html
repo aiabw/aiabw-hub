@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - AIABW Hub</title>
+    <style>
+        /* 使用与主站相同的CSS变量 */
+        :root {
+            --primary: #6366f1;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 { color: var(--primary); }
+        a { color: var(--primary); }
+        .back-link { margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy</h1>
+    <p><strong>Last Updated:</strong> January 2024</p>
+    
+    <h2>1. Information We Collect</h2>
+    <p>We collect information you provide directly, such as when you subscribe to our newsletter or submit tool recommendations.</p>
+    
+    <h2>2. How We Use Your Information</h2>
+    <p>To provide and improve our services, send newsletters, and analyze usage patterns.</p>
+    
+    <h2>3. Third-Party Services</h2>
+    <p>We use Google Analytics to understand website traffic. We also link to external tools and services.</p>
+    
+    <h2>4. Your Rights</h2>
+    <p>You can unsubscribe from our newsletter at any time by clicking the unsubscribe link.</p>
+    
+    <h2>5. Contact Us</h2>
+    <p>For privacy-related questions: <a href="mailto:privacy@aiabw.com">privacy@aiabw.com</a></p>
+    
+    <div class="back-link">
+        <a href="/">← Back to AIABW Hub</a>
+    </div>
+    
+    <script>
+        // 简单主题检测
+        const savedTheme = localStorage.getItem('aiabw_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

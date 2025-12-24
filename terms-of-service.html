@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - AIABW Hub</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 { color: var(--primary); }
+        a { color: var(--primary); }
+        .back-link { margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <h1>Terms of Service</h1>
+    <p><strong>Last Updated:</strong> January 2024</p>
+    
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing AIABW Hub, you agree to these Terms of Service.</p>
+    
+    <h2>2. Description of Service</h2>
+    <p>AIABW Hub provides curated information about AI and Web3 tools. We are an informational directory.</p>
+    
+    <h2>3. Disclaimer</h2>
+    <p>We do not provide financial advice. Cryptocurrency and trading involve risk. Do your own research.</p>
+    
+    <h2>4. External Links</h2>
+    <p>We link to third-party sites. We are not responsible for their content or practices.</p>
+    
+    <h2>5. Limitation of Liability</h2>
+    <p>AIABW Hub is not liable for any losses related to the use of tools listed on our platform.</p>
+    
+    <div class="back-link">
+        <a href="/">← Back to AIABW Hub</a>
+    </div>
+    
+    <script>
+        const savedTheme = localStorage.getItem('aiabw_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

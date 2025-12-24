@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - AIABW Hub</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 { color: var(--primary); }
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        [data-theme="dark"] .warning {
+            background: #451a03;
+            border-left-color: #f59e0b;
+        }
+        .back-link { margin-top: 40px; }
+        a { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <h1>Important Disclaimer</h1>
+    
+    <div class="warning">
+        <strong>⚠️ RISK WARNING:</strong> Trading cryptocurrencies and participating in airdrops involves substantial risk of loss.
+    </div>
+    
+    <h2>Not Financial Advice</h2>
+    <p>All content on AIABW Hub is for informational purposes only. We are not financial advisors.</p>
+    
+    <h2>Do Your Own Research (DYOR)</h2>
+    <p>Always conduct your own research before making any financial decisions. Verify all information independently.</p>
+    
+    <h2>Airdrop Risks</h2>
+    <p>Many airdrops require sharing personal information or connecting wallets. Be aware of security risks.</p>
+    
+    <h2>Affiliate Links</h2>
+    <p>Some links are affiliate links. We may earn commission if you use these links.</p>
+    
+    <h2>Accuracy of Information</h2>
+    <p>We strive for accuracy but cannot guarantee all information is current or correct.</p>
+    
+    <p><strong>By using AIABW Hub, you acknowledge and accept these risks.</strong></p>
+    
+    <div class="back-link">
+        <a href="/">← Back to AIABW Hub</a>
+    </div>
+    
+    <script>
+        const savedTheme = localStorage.getItem('aiabw_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

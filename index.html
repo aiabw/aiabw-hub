@@ -3,19 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIABW Hub - AI & Web3 Tools Directory</title>
-    <meta name="description" content="Curated directory of AI and Web3 tools. Discover the best tools for trading, development, and opportunities.">
+    <title>AIABW Hub - Discover Better AI & Web3 Tools | Airdrop Radar & Profit Calculator</title>
+    <meta name="description" content="Curated directory of essential AI & Web3 tools. Real-time airdrop radar, profit calculator, and actionable insights. Find trading, DeFi, and AI agent tools.">
+    <meta name="keywords" content="AI tools, Web3 tools, cryptocurrency, airdrop radar, profit calculator, DeFi, trading, blockchain, Ethereum, Bitcoin">
     
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="AIABW Hub - AI & Web3 Tools Directory with Airdrop Radar">
+    <meta property="og:description" content="Discover curated AI & Web3 tools. Track live airdrops, calculate your profit potential, and find the best tools for crypto success.">
+    <meta property="og:image" content="https://aiabw.com/og-image.png">
+    <meta property="og:url" content="https://aiabw.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AIABW Hub - AI & Web3 Tools Directory">
+    <meta name="twitter:description" content="Real-time airdrop tracking and profit calculator for AI & Web3 tools.">
+    
+    <!-- Font Awesome with privacy-friendly approach -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    
+    <!-- Google Analytics 4 (Your ID: G-11LB54EX3D) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-11LB54EX3D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-11LB54EX3D');
+        
+        // Track custom events
+        function trackEvent(category, action, label) {
+            gtag('event', action, {
+                'event_category': category,
+                'event_label': label,
+                'transport_type': 'beacon'
+            });
+        }
+    </script>
     
     <!-- Inline CSS Start -->
     <style>
@@ -25,6 +59,7 @@
             --primary: #6366f1;
             --primary-dark: #4f46e5;
             --primary-light: #818cf8;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             
             /* Neutral Colors */
             --background: #f8fafc;
@@ -99,6 +134,7 @@
             line-height: 1.6;
             transition: background-color var(--transition-base), color var(--transition-base);
             min-height: 100vh;
+            position: relative;
         }
         
         .container {
@@ -106,6 +142,42 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 var(--space-lg);
+        }
+        
+        /* ===== BACK TO TOP BUTTON ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
         }
         
         /* ===== HEADER ===== */
@@ -229,15 +301,29 @@
         .hero {
             padding: var(--space-2xl) 0;
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             color: white;
             border-radius: 0 0 var(--radius-xl) var(--radius-xl);
             margin-bottom: var(--space-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .hero-content {
             max-width: 768px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
@@ -315,6 +401,71 @@
             font-size: var(--font-size-sm);
             opacity: 0.7;
             color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* ===== EMAIL SUBSCRIPTION ===== */
+        .email-subscription {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin: var(--space-2xl) 0;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .email-subscription h2 {
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-2xl);
+        }
+        
+        .email-subscription p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .subscription-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .subscription-form input {
+            flex: 1;
+            padding: var(--space-md);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            transition: border-color var(--transition-fast);
+        }
+        
+        .subscription-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .subscription-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+        
+        .subscription-form button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .subscription-note {
+            margin-top: var(--space-sm);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
         }
         
         /* ===== STATS ===== */
@@ -710,9 +861,26 @@
             transform: translateY(-1px);
         }
         
+        .learn-more-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 6px 16px;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: var(--space-sm);
+        }
+        
+        .learn-more-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
         /* ===== PROFIT CALCULATOR ===== */
         .profit-calculator {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             color: white;
             padding: var(--space-2xl) 0;
             margin: var(--space-2xl) 0;
@@ -1143,6 +1311,8 @@
             
             .nav-menu {
                 gap: var(--space-md);
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .hero h1 {
@@ -1193,6 +1363,15 @@
                 justify-content: center;
             }
             
+            .subscription-form {
+                flex-direction: column;
+            }
+            
+            .back-to-top {
+                bottom: var(--space-lg);
+                right: var(--space-lg);
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
             }
@@ -1231,11 +1410,20 @@
                 flex-direction: column;
                 gap: var(--space-md);
             }
+            
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
     <!-- Inline CSS End -->
 </head>
 <body>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -1252,11 +1440,11 @@
                     <a href="#tools" class="nav-link">Tools</a>
                     <a href="#radar" class="nav-link">Airdrop Radar</a>
                     <a href="#calculator" class="nav-link">Calculator</a>
-                    <a href="mailto:submit@aiabw.com" class="nav-link">Submit</a>
+                    <a href="#subscribe" class="nav-link">Newsletter</a>
                 </div>
                 
                 <div class="nav-actions">
-                    <button class="theme-toggle" id="themeToggle">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
                     <div class="language-switcher">
@@ -1301,6 +1489,23 @@
                 <span class="stat-number" id="affiliateCount">4</span>
                 <span class="stat-label">With Offers</span>
             </div>
+            <div class="stat">
+                <span class="stat-number" id="monthlyVisitors">10K+</span>
+                <span class="stat-label">Monthly Visitors</span>
+            </div>
+        </section>
+        
+        <!-- Email Subscription -->
+        <section class="email-subscription" id="subscribe">
+            <h2>Stay Updated on New Tools & Airdrops</h2>
+            <p>Get weekly curated lists of the hottest AI & Web3 tools, exclusive airdrop opportunities, and market insights.</p>
+            
+            <form class="subscription-form" id="subscribeForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeYourFormIDHere/formResponse" method="POST" target="_blank">
+                <input type="email" name="entry.1234567890" placeholder="Your email address" required aria-label="Email address">
+                <button type="submit">Subscribe</button>
+            </form>
+            
+            <p class="subscription-note">No spam. Unsubscribe anytime.</p>
         </section>
         
         <!-- Airdrop Radar -->
@@ -1313,7 +1518,7 @@
                 
                 <div class="radar-stats">
                     <div class="radar-stat">
-                        <span class="number" id="totalProjects">8</span>
+                        <span class="number" id="totalProjects">4</span>
                         <span class="label">Projects</span>
                     </div>
                     <div class="radar-stat">
@@ -1364,200 +1569,7 @@
             </div>
             
             <div id="toolsGrid" class="tools-grid">
-                <!-- Tool 1 -->
-                <div class="tool-card" data-category="trading">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Hyperliquid Perpetuals</h3>
-                            <span class="affiliate-badge">OFFER</span>
-                        </div>
-                        <span class="tool-category">Trading</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">High-performance decentralized perpetual contracts exchange with low fees.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">DEX</span>
-                            <span class="tool-tag">Perpetuals</span>
-                            <span class="tool-tag">Trading</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">2 days ago</span>
-                            <a href="https://hyperliquid.xyz?ref=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 2 -->
-                <div class="tool-card" data-category="ai">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Virtuals AI Agents</h3>
-                            <span class="affiliate-badge">OFFER</span>
-                        </div>
-                        <span class="tool-category">AI</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Platform to create, discover and interact with AI agents. Early access available.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">AI Agents</span>
-                            <span class="tool-tag">Platform</span>
-                            <span class="tool-tag">Early Access</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">5 days ago</span>
-                            <a href="https://virtuals.io?utm_source=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 3 -->
-                <div class="tool-card" data-category="trading">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Aark Digital Nomad DEX</h3>
-                            <span class="affiliate-badge">OFFER</span>
-                        </div>
-                        <span class="tool-category">Trading</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Perpetual DEX designed for digital nomads with focus on UX.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">DEX</span>
-                            <span class="tool-tag">Perpetuals</span>
-                            <span class="tool-tag">UX</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">7 days ago</span>
-                            <a href="https://app.aark.digital?ref=aiabw" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 4 -->
-                <div class="tool-card" data-category="data">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>CoinMarketCap</h3>
-                        </div>
-                        <span class="tool-category">Data</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Track cryptocurrency prices, market cap, and discover new projects.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">Data</span>
-                            <span class="tool-tag">Prices</span>
-                            <span class="tool-tag">Market Cap</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">10 days ago</span>
-                            <a href="https://coinmarketcap.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 5 -->
-                <div class="tool-card" data-category="ai">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Surf Copilot AI</h3>
-                        </div>
-                        <span class="tool-category">AI</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">AI-powered market research assistant for crypto analysis.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">AI</span>
-                            <span class="tool-tag">Research</span>
-                            <span class="tool-tag">Analysis</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">12 days ago</span>
-                            <a href="https://surf.mewtocol.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 6 -->
-                <div class="tool-card" data-category="airdrop">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Galxe Web3 Platform</h3>
-                        </div>
-                        <span class="tool-category">Airdrop</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Essential platform for Web3 tasks, campaigns and airdrop opportunities.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">Airdrop</span>
-                            <span class="tool-tag">Tasks</span>
-                            <span class="tool-tag">Web3</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">15 days ago</span>
-                            <a href="https://galxe.com" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 7 -->
-                <div class="tool-card" data-category="wallet">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>MetaMask Wallet</h3>
-                        </div>
-                        <span class="tool-category">Wallet</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Popular Ethereum wallet and gateway to blockchain apps.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">Wallet</span>
-                            <span class="tool-tag">Ethereum</span>
-                            <span class="tool-tag">Browser Extension</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">18 days ago</span>
-                            <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tool 8 -->
-                <div class="tool-card" data-category="data">
-                    <div class="tool-header">
-                        <div class="tool-title">
-                            <h3>Etherscan Explorer</h3>
-                        </div>
-                        <span class="tool-category">Data</span>
-                    </div>
-                    <div class="tool-body">
-                        <p class="tool-description">Blockchain explorer and analytics platform for Ethereum.</p>
-                        <div class="tool-tags">
-                            <span class="tool-tag">Explorer</span>
-                            <span class="tool-tag">Analytics</span>
-                            <span class="tool-tag">Ethereum</span>
-                        </div>
-                        <div class="tool-footer">
-                            <span class="tool-date">20 days ago</span>
-                            <a href="https://etherscan.io" target="_blank" rel="noopener noreferrer" class="visit-btn">
-                                Visit Tool <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <!-- Tools will be dynamically inserted here -->
             </div>
             
             <div id="noResults" class="no-results" style="display: none;">
@@ -1708,6 +1720,7 @@
                 <div class="footer-section">
                     <h3>AIABW Hub</h3>
                     <p>Curated directory of AI and Web3 tools. We help you discover opportunities.</p>
+                    <p>Stay ahead with our real-time airdrop radar and profit calculator.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -1716,24 +1729,31 @@
                         <li><a href="#tools">Tools</a></li>
                         <li><a href="#radar">Airdrop Radar</a></li>
                         <li><a href="#calculator">Calculator</a></li>
+                        <li><a href="#subscribe">Newsletter</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                        <li><a href="/disclaimer">Disclaimer</a></li>
+                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="/disclaimer.html">Disclaimer</a></li>
+                        <li><a href="mailto:contact@aiabw.com">Contact Us</a></li>
                     </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://twitter.com/AIABWHub" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/aiabw" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://t.me/AIABWHub" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://discord.gg/aiabw" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 AIABW Hub. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
-                </div>
+                <p>© 2024 AIABW Hub. All rights reserved. | AI & Web3 Tools Directory</p>
+                <p>Data is updated daily. Tools are curated based on community feedback and utility.</p>
             </div>
         </div>
     </footer>
@@ -1754,9 +1774,9 @@
             en: {
                 nav_home: "Home",
                 nav_tools: "Tools",
-                nav_categories: "Categories",
-                nav_airdrop: "Airdrops",
-                nav_submit: "Submit",
+                nav_airdrop: "Airdrop Radar",
+                nav_calculator: "Profit Calculator",
+                nav_subscribe: "Newsletter",
                 hero_title: "Discover Better AI & Web3 Tools",
                 hero_subtitle: "Curated directory of essential tools for trading, development, and opportunities. Updated daily.",
                 search_placeholder: "Search tools by name or category...",
@@ -1765,12 +1785,16 @@
                 stat_tools: "Tools",
                 stat_categories: "Categories",
                 stat_affiliates: "With Offers",
+                stat_visitors: "Monthly Visitors",
+                subscribe_title: "Stay Updated on New Tools & Airdrops",
+                subscribe_text: "Get weekly curated lists of the hottest AI & Web3 tools, exclusive airdrop opportunities, and market insights.",
+                subscribe_button: "Subscribe",
+                subscribe_note: "No spam. Unsubscribe anytime.",
                 category_title: "Browse by Category",
                 cat_all: "All",
                 cat_trading: "Trading",
                 cat_ai: "AI",
                 cat_airdrop: "Airdrop",
-                cat_infra: "Infrastructure",
                 cat_wallet: "Wallet",
                 cat_data: "Data",
                 tools_title: "Featured Tools",
@@ -1779,24 +1803,23 @@
                 sort_name: "Name A-Z",
                 sort_newest: "Newest",
                 affiliate_badge: "OFFER",
+                learn_more: "Learn More",
                 visit_button: "Visit Tool",
                 days_ago: "days ago",
                 no_results_title: "No tools found",
                 no_results_text: "Try adjusting your search or filter criteria",
-                loading: "Loading tools...",
-                cta_title: "Submit Your Tool",
-                cta_text: "Have a great tool that should be listed? Let us know!",
-                cta_button: "Submit Tool",
-                footer_description: "Curated directory of AI and Web3 tools. We help you discover opportunities.",
-                footer_quick_links: "Quick Links",
-                footer_categories: "Categories",
-                footer_legal: "Legal",
-                footer_disclaimer: "Disclaimer",
-                footer_privacy: "Privacy Policy",
-                footer_terms: "Terms of Service",
-                footer_copyright: "© 2025 AIABW Hub. All rights reserved.",
-                
-                // ===== CALCULATOR TRANSLATIONS =====
+                radar_title: "🛰️ Airdrop Hunter Radar",
+                radar_subtitle: "Real-time monitoring of AI & Web3 airdrop opportunities",
+                radar_projects: "Projects",
+                radar_participants: "Participants",
+                radar_hotness: "Avg. Hotness",
+                radar_watchers: "Live Watchers",
+                radar_potential: "Potential",
+                radar_difficulty: "Difficulty",
+                radar_timeleft: "Time Left",
+                radar_steps: "Steps to Earn",
+                radar_track: "Start Tracking",
+                radar_disclaimer: "Data updates every 15min. Hotness based on community buzz, participants & deadline",
                 calc_title: "💰 AI Tools Profit Calculator",
                 calc_subtitle: "Calculate how much you can earn monthly using AI tools",
                 calc_profile: "Select Your Profile",
@@ -1823,27 +1846,23 @@
                 calc_share: "Share My Results",
                 calc_reset: "Reset",
                 calc_disclaimer: "* This is an estimation based on average user data. Actual results may vary.",
-                
-                // ===== RADAR TRANSLATIONS =====
-                radar_title: "🛰️ Airdrop Hunter Radar",
-                radar_subtitle: "Real-time monitoring of AI & Web3 airdrop opportunities",
-                radar_projects: "Projects",
-                radar_participants: "Participants",
-                radar_hotness: "Avg. Hotness",
-                radar_watchers: "Live Watchers",
-                radar_potential: "Potential",
-                radar_difficulty: "Difficulty",
-                radar_timeleft: "Time Left",
-                radar_steps: "Steps to Earn",
-                radar_track: "Start Tracking",
-                radar_disclaimer: "Data updates every 15min. Hotness based on community buzz, participants & deadline"
+                cta_title: "Submit Your Tool",
+                cta_text: "Have a great tool that should be listed? Let us know!",
+                cta_button: "Submit Tool",
+                footer_description: "Curated directory of AI and Web3 tools. We help you discover opportunities.",
+                footer_quick_links: "Quick Links",
+                footer_legal: "Legal",
+                footer_connect: "Connect",
+                footer_copyright: "© 2024 AIABW Hub. All rights reserved.",
+                footer_tagline: "AI & Web3 Tools Directory",
+                footer_update: "Data is updated daily. Tools are curated based on community feedback and utility."
             },
             zh: {
                 nav_home: "首页",
                 nav_tools: "工具",
-                nav_categories: "分类",
-                nav_airdrop: "空投",
-                nav_submit: "提交",
+                nav_airdrop: "空投雷达",
+                nav_calculator: "收益计算器",
+                nav_subscribe: "邮件订阅",
                 hero_title: "发现更好的AI与Web3工具",
                 hero_subtitle: "精选的交易、开发和机会工具目录，每日更新。",
                 search_placeholder: "搜索工具名称或分类...",
@@ -1852,12 +1871,16 @@
                 stat_tools: "工具",
                 stat_categories: "分类",
                 stat_affiliates: "含福利",
+                stat_visitors: "月访问量",
+                subscribe_title: "获取最新工具与空投信息",
+                subscribe_text: "每周获取精选的AI和Web3工具列表、独家空投机会和市场洞察。",
+                subscribe_button: "订阅",
+                subscribe_note: "无垃圾邮件，可随时退订。",
                 category_title: "按分类浏览",
                 cat_all: "全部",
                 cat_trading: "交易",
                 cat_ai: "AI",
                 cat_airdrop: "空投",
-                cat_infra: "基础设施",
                 cat_wallet: "钱包",
                 cat_data: "数据",
                 tools_title: "精选工具",
@@ -1866,24 +1889,23 @@
                 sort_name: "名称A-Z",
                 sort_newest: "最新",
                 affiliate_badge: "推荐",
+                learn_more: "了解更多",
                 visit_button: "访问工具",
                 days_ago: "天前",
                 no_results_title: "未找到工具",
                 no_results_text: "尝试调整搜索或筛选条件",
-                loading: "加载工具...",
-                cta_title: "提交你的工具",
-                cta_text: "有很棒的工具要推荐？告诉我们！",
-                cta_button: "提交工具",
-                footer_description: "AI和Web3工具精选目录，助您发现机会。",
-                footer_quick_links: "快速链接",
-                footer_categories: "分类",
-                footer_legal: "法律",
-                footer_disclaimer: "免责声明",
-                footer_privacy: "隐私政策",
-                footer_terms: "服务条款",
-                footer_copyright: "© 2025 AIABW Hub 保留所有权利",
-                
-                // ===== 计算器中文翻译 =====
+                radar_title: "🛰️ 空投猎人雷达",
+                radar_subtitle: "实时监控AI与Web3项目空投机会",
+                radar_projects: "项目数",
+                radar_participants: "参与人数",
+                radar_hotness: "平均热度",
+                radar_watchers: "实时监控",
+                radar_potential: "预估收益",
+                radar_difficulty: "难度",
+                radar_timeleft: "剩余时间",
+                radar_steps: "获取步骤",
+                radar_track: "开始追踪",
+                radar_disclaimer: "数据每15分钟更新，热度基于社区讨论、参与人数和倒计时计算",
                 calc_title: "💰 AI工具收益计算器",
                 calc_subtitle: "计算使用AI工具每月能赚多少钱",
                 calc_profile: "选择你的角色",
@@ -1910,20 +1932,16 @@
                 calc_share: "分享我的结果",
                 calc_reset: "重置",
                 calc_disclaimer: "* 这是基于平均用户数据的估算，实际结果可能有所不同。",
-                
-                // ===== 雷达中文翻译 =====
-                radar_title: "🛰️ 空投猎人雷达",
-                radar_subtitle: "实时监控AI与Web3项目空投机会",
-                radar_projects: "项目数",
-                radar_participants: "参与人数",
-                radar_hotness: "平均热度",
-                radar_watchers: "实时监控",
-                radar_potential: "预估收益",
-                radar_difficulty: "难度",
-                radar_timeleft: "剩余时间",
-                radar_steps: "获取步骤",
-                radar_track: "开始追踪",
-                radar_disclaimer: "数据每15分钟更新，热度基于社区讨论、参与人数和倒计时计算"
+                cta_title: "提交你的工具",
+                cta_text: "有很棒的工具要推荐？告诉我们！",
+                cta_button: "提交工具",
+                footer_description: "AI和Web3工具精选目录，助您发现机会。",
+                footer_quick_links: "快速链接",
+                footer_legal: "法律",
+                footer_connect: "关注我们",
+                footer_copyright: "© 2024 AIABW Hub 保留所有权利",
+                footer_tagline: "AI与Web3工具目录",
+                footer_update: "数据每日更新，工具根据社区反馈和实用性精选。"
             }
         };
         
@@ -1931,140 +1949,198 @@
         const toolsData = {
             en: [
                 {
+                    "id": "hyperliquid",
                     "name": "Hyperliquid Perpetuals",
                     "category": "trading",
-                    "description": "High-performance decentralized perpetual contracts exchange with low fees.",
+                    "description": "High-performance decentralized perpetual contracts exchange with low fees. Offers advanced trading features and deep liquidity.",
                     "link": "https://hyperliquid.xyz?ref=aiabw",
-                    "tags": ["DEX", "Perpetuals", "Trading"],
-                    "dateAdded": "2025-01-15",
-                    "affiliate": true
+                    "tags": ["DEX", "Perpetuals", "Trading", "Low Fees"],
+                    "dateAdded": "2024-01-15",
+                    "affiliate": true,
+                    "features": ["High-speed trading", "Low fees", "Deep liquidity", "Advanced order types"],
+                    "rating": 4.8
                 },
                 {
+                    "id": "virtuals",
                     "name": "Virtuals AI Agents",
                     "category": "ai",
-                    "description": "Platform to create, discover and interact with AI agents. Early access available.",
+                    "description": "Platform to create, discover and interact with AI agents. Early access available with potential airdrop opportunities.",
                     "link": "https://virtuals.io?utm_source=aiabw",
-                    "tags": ["AI Agents", "Platform", "Early Access"],
-                    "dateAdded": "2025-01-10",
-                    "affiliate": true
+                    "tags": ["AI Agents", "Platform", "Early Access", "Airdrop"],
+                    "dateAdded": "2024-01-10",
+                    "affiliate": true,
+                    "features": ["Create AI agents", "Discover agents", "Earn rewards", "Airdrop potential"],
+                    "rating": 4.6
                 },
                 {
+                    "id": "coinmarketcap",
                     "name": "CoinMarketCap",
                     "category": "data",
-                    "description": "Track cryptocurrency prices, market cap, and discover new projects.",
+                    "description": "Track cryptocurrency prices, market cap, and discover new projects. Essential tool for market analysis.",
                     "link": "https://coinmarketcap.com",
-                    "tags": ["Data", "Prices", "Market Cap"],
-                    "dateAdded": "2025-01-05"
+                    "tags": ["Data", "Prices", "Market Cap", "Analysis"],
+                    "dateAdded": "2024-01-05",
+                    "affiliate": false,
+                    "features": ["Real-time prices", "Market data", "Portfolio tracking", "News"],
+                    "rating": 4.7
                 },
                 {
+                    "id": "aark",
                     "name": "Aark Digital Nomad DEX",
                     "category": "trading",
-                    "description": "Perpetual DEX designed for digital nomads with focus on UX.",
+                    "description": "Perpetual DEX designed for digital nomads with focus on UX. Offers testnet opportunities with potential rewards.",
                     "link": "https://app.aark.digital?ref=aiabw",
-                    "tags": ["DEX", "Perpetuals", "UX"],
-                    "dateAdded": "2025-01-12",
-                    "affiliate": true
+                    "tags": ["DEX", "Perpetuals", "UX", "Testnet"],
+                    "dateAdded": "2024-01-12",
+                    "affiliate": true,
+                    "features": ["User-friendly", "Testnet rewards", "Low fees", "Mobile optimized"],
+                    "rating": 4.4
                 },
                 {
+                    "id": "surfcopilot",
                     "name": "Surf Copilot AI",
                     "category": "ai",
-                    "description": "AI-powered market research assistant for crypto analysis.",
+                    "description": "AI-powered market research assistant for crypto analysis. Helps identify trends and opportunities.",
                     "link": "https://surf.mewtocol.com",
-                    "tags": ["AI", "Research", "Analysis"],
-                    "dateAdded": "2025-01-08"
+                    "tags": ["AI", "Research", "Analysis", "Trends"],
+                    "dateAdded": "2024-01-08",
+                    "affiliate": false,
+                    "features": ["Market analysis", "Trend identification", "Research reports", "AI insights"],
+                    "rating": 4.3
                 },
                 {
+                    "id": "galxe",
                     "name": "Galxe Web3 Platform",
                     "category": "airdrop",
-                    "description": "Essential platform for Web3 tasks, campaigns and airdrop opportunities.",
+                    "description": "Essential platform for Web3 tasks, campaigns and airdrop opportunities. Complete tasks to earn rewards.",
                     "link": "https://galxe.com",
-                    "tags": ["Airdrop", "Tasks", "Web3"],
-                    "dateAdded": "2025-01-03"
+                    "tags": ["Airdrop", "Tasks", "Web3", "Rewards"],
+                    "dateAdded": "2024-01-03",
+                    "affiliate": false,
+                    "features": ["Task completion", "Airdrop campaigns", "NFT rewards", "Community"],
+                    "rating": 4.5
                 },
                 {
+                    "id": "metamask",
                     "name": "MetaMask Wallet",
                     "category": "wallet",
-                    "description": "Popular Ethereum wallet and gateway to blockchain apps.",
+                    "description": "Popular Ethereum wallet and gateway to blockchain apps. Secure storage for crypto assets.",
                     "link": "https://metamask.io",
-                    "tags": ["Wallet", "Ethereum", "Browser Extension"],
-                    "dateAdded": "2025-01-01"
+                    "tags": ["Wallet", "Ethereum", "Browser Extension", "Security"],
+                    "dateAdded": "2024-01-01",
+                    "affiliate": false,
+                    "features": ["Secure storage", "DApp browser", "Token swaps", "Multi-chain"],
+                    "rating": 4.8
                 },
                 {
+                    "id": "etherscan",
                     "name": "Etherscan Explorer",
                     "category": "data",
-                    "description": "Blockchain explorer and analytics platform for Ethereum.",
+                    "description": "Blockchain explorer and analytics platform for Ethereum. Essential for transaction verification.",
                     "link": "https://etherscan.io",
-                    "tags": ["Explorer", "Analytics", "Ethereum"],
-                    "dateAdded": "2023-12-28"
+                    "tags": ["Explorer", "Analytics", "Ethereum", "Transactions"],
+                    "dateAdded": "2023-12-28",
+                    "affiliate": false,
+                    "features": ["Transaction tracking", "Address analysis", "Contract verification", "Gas tracker"],
+                    "rating": 4.9
                 }
             ],
             zh: [
                 {
+                    "id": "hyperliquid",
                     "name": "Hyperliquid 永续合约",
                     "category": "trading",
-                    "description": "高性能去中心化永续合约交易所，手续费低。",
+                    "description": "高性能去中心化永续合约交易所，手续费低。提供高级交易功能和深度流动性。",
                     "link": "https://hyperliquid.xyz?ref=aiabw",
-                    "tags": ["DEX", "永续合约", "交易"],
-                    "dateAdded": "2025-01-15",
-                    "affiliate": true
+                    "tags": ["DEX", "永续合约", "交易", "低手续费"],
+                    "dateAdded": "2024-01-15",
+                    "affiliate": true,
+                    "features": ["高速交易", "低手续费", "深度流动性", "高级订单类型"],
+                    "rating": 4.8
                 },
                 {
+                    "id": "virtuals",
                     "name": "Virtuals AI 代理平台",
                     "category": "ai",
-                    "description": "创建、发现和与AI代理交互的平台。提供早期访问。",
+                    "description": "创建、发现和与AI代理交互的平台。提供早期访问和潜在空投机会。",
                     "link": "https://virtuals.io?utm_source=aiabw",
-                    "tags": ["AI代理", "平台", "早期访问"],
-                    "dateAdded": "2025-01-10",
-                    "affiliate": true
+                    "tags": ["AI代理", "平台", "早期访问", "空投"],
+                    "dateAdded": "2024-01-10",
+                    "affiliate": true,
+                    "features": ["创建AI代理", "发现代理", "赚取奖励", "空投潜力"],
+                    "rating": 4.6
                 },
                 {
+                    "id": "coinmarketcap",
                     "name": "CoinMarketCap 行情",
                     "category": "data",
-                    "description": "追踪加密货币价格、市值，发现新项目。",
+                    "description": "追踪加密货币价格、市值，发现新项目。市场分析的必备工具。",
                     "link": "https://coinmarketcap.com",
-                    "tags": ["数据", "价格", "市值"],
-                    "dateAdded": "2025-01-05"
+                    "tags": ["数据", "价格", "市值", "分析"],
+                    "dateAdded": "2024-01-05",
+                    "affiliate": false,
+                    "features": ["实时价格", "市场数据", "投资组合跟踪", "新闻"],
+                    "rating": 4.7
                 },
                 {
+                    "id": "aark",
                     "name": "Aark 数字游民DEX",
                     "category": "trading",
-                    "description": "专为数字游民设计的永续DEX，注重用户体验。",
+                    "description": "专为数字游民设计的永续DEX，注重用户体验。提供测试网机会和潜在奖励。",
                     "link": "https://app.aark.digital?ref=aiabw",
-                    "tags": ["DEX", "永续合约", "用户体验"],
-                    "dateAdded": "2025-01-12",
-                    "affiliate": true
+                    "tags": ["DEX", "永续合约", "用户体验", "测试网"],
+                    "dateAdded": "2024-01-12",
+                    "affiliate": true,
+                    "features": ["用户友好", "测试网奖励", "低手续费", "移动端优化"],
+                    "rating": 4.4
                 },
                 {
+                    "id": "surfcopilot",
                     "name": "Surf Copilot AI助手",
                     "category": "ai",
-                    "description": "AI驱动的市场研究助手，用于加密货币分析。",
+                    "description": "AI驱动的市场研究助手，用于加密货币分析。帮助识别趋势和机会。",
                     "link": "https://surf.mewtocol.com",
-                    "tags": ["AI", "研究", "分析"],
-                    "dateAdded": "2025-01-08"
+                    "tags": ["AI", "研究", "分析", "趋势"],
+                    "dateAdded": "2024-01-08",
+                    "affiliate": false,
+                    "features": ["市场分析", "趋势识别", "研究报告", "AI洞察"],
+                    "rating": 4.3
                 },
                 {
+                    "id": "galxe",
                     "name": "Galxe Web3 平台",
                     "category": "airdrop",
-                    "description": "参与Web3任务、活动和空投机会的必备平台。",
+                    "description": "参与Web3任务、活动和空投机会的必备平台。完成任务赚取奖励。",
                     "link": "https://galxe.com",
-                    "tags": ["空投", "任务", "Web3"],
-                    "dateAdded": "2025-01-03"
+                    "tags": ["空投", "任务", "Web3", "奖励"],
+                    "dateAdded": "2024-01-03",
+                    "affiliate": false,
+                    "features": ["任务完成", "空投活动", "NFT奖励", "社区"],
+                    "rating": 4.5
                 },
                 {
+                    "id": "metamask",
                     "name": "MetaMask 钱包",
                     "category": "wallet",
-                    "description": "流行的以太坊钱包和区块链应用网关。",
+                    "description": "流行的以太坊钱包和区块链应用网关。安全的加密货币资产存储。",
                     "link": "https://metamask.io",
-                    "tags": ["钱包", "以太坊", "浏览器扩展"],
-                    "dateAdded": "2025-01-01"
+                    "tags": ["钱包", "以太坊", "浏览器扩展", "安全"],
+                    "dateAdded": "2024-01-01",
+                    "affiliate": false,
+                    "features": ["安全存储", "DApp浏览器", "代币兑换", "多链支持"],
+                    "rating": 4.8
                 },
                 {
+                    "id": "etherscan",
                     "name": "Etherscan 区块浏览器",
                     "category": "data",
-                    "description": "以太坊区块链浏览器和分析平台。",
+                    "description": "以太坊区块链浏览器和分析平台。交易验证的必备工具。",
                     "link": "https://etherscan.io",
-                    "tags": ["浏览器", "分析", "以太坊"],
-                    "dateAdded": "2023-12-28"
+                    "tags": ["浏览器", "分析", "以太坊", "交易"],
+                    "dateAdded": "2023-12-28",
+                    "affiliate": false,
+                    "features": ["交易追踪", "地址分析", "合约验证", "Gas跟踪"],
+                    "rating": 4.9
                 }
             ]
         };
@@ -2169,6 +2245,7 @@
             init() {
                 this.renderRadar();
                 this.startLiveUpdates();
+                console.log("Radar initialized");
             },
             
             renderRadar() {
@@ -2233,6 +2310,9 @@
                 }).join('');
                 
                 container.innerHTML = radarHTML;
+                
+                // Track GA event
+                trackEvent('Radar', 'View', `Projects: ${projects.length}`);
             },
             
             startLiveUpdates() {
@@ -2325,6 +2405,9 @@
                 this.setupEventListeners();
                 this.updateCalculator();
                 this.updateRecommendedTools();
+                
+                // Track GA event
+                trackEvent('Calculator', 'View', 'Initialized');
             },
             
             setupEventListeners() {
@@ -2347,6 +2430,9 @@
                         
                         this.updateCalculator();
                         this.updateRecommendedTools();
+                        
+                        // Track GA event
+                        trackEvent('Calculator', 'Profile Change', this.currentProfile);
                     });
                 });
                 
@@ -2359,6 +2445,7 @@
                         this.dailyOps = parseInt(e.target.value);
                         dailyOpsValue.textContent = this.dailyOps;
                         this.updateCalculator();
+                        trackEvent('Calculator', 'Adjust Slider', `DailyOps: ${this.dailyOps}`);
                     });
                 }
                 
@@ -2368,6 +2455,7 @@
                     profitSelect.addEventListener('change', (e) => {
                         this.profitPerOp = parseInt(e.target.value);
                         this.updateCalculator();
+                        trackEvent('Calculator', 'Adjust Profit', `ProfitPerOp: ${this.profitPerOp}`);
                     });
                 }
                 
@@ -2377,6 +2465,7 @@
                     aiBoostSelect.addEventListener('change', (e) => {
                         this.aiBoost = parseFloat(e.target.value);
                         this.updateCalculator();
+                        trackEvent('Calculator', 'Adjust AI Boost', `AIBoost: ${this.aiBoost}`);
                     });
                 }
             },
@@ -2400,6 +2489,9 @@
                 document.getElementById('currentEarnings').textContent = `$${earnings.current.toLocaleString()}`;
                 document.getElementById('aiEarnings').textContent = `$${earnings.withAI.toLocaleString()}`;
                 document.getElementById('profitIncrease').textContent = `+$${earnings.increase.toLocaleString()}`;
+                
+                // Track GA event
+                trackEvent('Calculator', 'Calculate', `Result: $${earnings.withAI.toLocaleString()}`);
             },
             
             updateRecommendedTools() {
@@ -2460,6 +2552,9 @@
                     profile: this.currentProfile
                 });
                 localStorage.setItem('aiabw_calculator_shares', JSON.stringify(shares.slice(-50)));
+                
+                // Track GA event
+                trackEvent('Calculator', 'Share Results', `Earnings: $${earnings.withAI.toLocaleString()}`);
             },
             
             getProfileName() {
@@ -2494,6 +2589,9 @@
                 
                 this.updateCalculator();
                 this.updateRecommendedTools();
+                
+                // Track GA event
+                trackEvent('Calculator', 'Reset', this.currentProfile);
             }
         };
         
@@ -2508,6 +2606,10 @@
             const diffTime = Math.abs(now - date);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             return `${diffDays} ${t('days_ago')}`;
+        }
+        
+        function getToolDetailsUrl(toolId) {
+            return `/tool/${toolId}`;
         }
         
         // ===== LANGUAGE FUNCTIONS =====
@@ -2530,7 +2632,7 @@
             // Update page text
             updatePageText();
             
-            // Update tools data
+            // Update tools data and render
             allTools = toolsData[currentLanguage] || toolsData.en;
             filterTools();
             updateStats();
@@ -2541,6 +2643,11 @@
             // Update calculator
             calculatorData.updateRecommendedTools();
             calculatorData.updateCalculator();
+            
+            // Track GA event
+            trackEvent('Language', 'Switch', lang);
+            
+            console.log(`Language switched to ${lang}`);
         }
         
         function updatePageText() {
@@ -2581,6 +2688,9 @@
             document.documentElement.setAttribute('data-theme', currentTheme);
             localStorage.setItem('aiabw_theme', currentTheme);
             updateThemeIcon();
+            
+            // Track GA event
+            trackEvent('Theme', 'Toggle', currentTheme);
         }
         
         function updateThemeIcon() {
@@ -2679,7 +2789,7 @@
                     <div class="tool-header">
                         <div class="tool-title">
                             <h3>${tool.name}</h3>
-                            ${isAffiliate ? `<span class="affiliate-badge">OFFER</span>` : ''}
+                            ${isAffiliate ? `<span class="affiliate-badge">${t('affiliate_badge')}</span>` : ''}
                         </div>
                         <span class="tool-category">${tool.category}</span>
                     </div>
@@ -2697,11 +2807,16 @@
                         
                         <div class="tool-footer">
                             <span class="tool-date">${formatDate(tool.dateAdded)}</span>
-                            <a href="${tool.link}" target="_blank" rel="noopener noreferrer" 
-                               class="visit-btn">
-                                Visit Tool
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <div>
+                                <button class="learn-more-btn" onclick="viewToolDetails('${tool.id}')">
+                                    ${t('learn_more')}
+                                </button>
+                                <a href="${tool.link}" target="_blank" rel="noopener noreferrer" 
+                                   class="visit-btn">
+                                    ${t('visit_button')}
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2717,6 +2832,50 @@
             if (searchInput) {
                 searchTerm = searchInput.value.toLowerCase();
                 filterTools();
+                
+                // Track GA event
+                if (searchTerm) {
+                    trackEvent('Search', 'Perform', searchTerm);
+                }
+            }
+        }
+        
+        // ===== BACK TO TOP FUNCTION =====
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Track GA event
+                trackEvent('Navigation', 'Back to Top', 'Clicked');
+            });
+        }
+        
+        // ===== EMAIL SUBSCRIPTION =====
+        function initEmailSubscription() {
+            const subscribeForm = document.getElementById('subscribeForm');
+            
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', function(e) {
+                    // Track GA event
+                    trackEvent('Subscription', 'Submit', 'Newsletter');
+                    
+                    // Show success message
+                    setTimeout(() => {
+                        alert(currentLanguage === 'zh' 
+                            ? '感谢订阅！请检查您的邮箱确认订阅。' 
+                            : 'Thanks for subscribing! Please check your email to confirm.');
+                    }, 500);
+                });
             }
         }
         
@@ -2728,7 +2887,9 @@
             
             if (project) {
                 console.log(`Tracking airdrop: ${project.name}`);
-                alert(`Started tracking: ${project.name}\nYou'll receive updates about this airdop.`);
+                alert(currentLanguage === 'zh' 
+                    ? `开始追踪空投：${project.name}\n您将收到此空投的最新信息。` 
+                    : `Started tracking: ${project.name}\nYou'll receive updates about this airdop.`);
                 
                 // Save to localStorage
                 const tracked = JSON.parse(localStorage.getItem('aiabw_tracked_airdrops') || '[]');
@@ -2738,6 +2899,23 @@
                     timestamp: new Date().toISOString()
                 });
                 localStorage.setItem('aiabw_tracked_airdrops', JSON.stringify(tracked.slice(-20)));
+                
+                // Track GA event
+                trackEvent('Airdrop', 'Track', project.name);
+            }
+        }
+        
+        function viewToolDetails(toolId) {
+            // For now, just show an alert. In the future, this will navigate to tool detail page
+            const tool = allTools.find(t => t.id === toolId);
+            if (tool) {
+                // Track GA event
+                trackEvent('Tools', 'View Details', tool.name);
+                
+                // Show tool info
+                alert(currentLanguage === 'zh' 
+                    ? `工具详情页开发中...\n\n名称: ${tool.name}\n分类: ${tool.category}\n描述: ${tool.description}` 
+                    : `Tool detail page under development...\n\nName: ${tool.name}\nCategory: ${tool.category}\nDescription: ${tool.description}`);
             }
         }
         
@@ -2772,10 +2950,19 @@
             // 5. Initialize calculator
             calculatorData.init();
             
-            // 6. Set up event listeners
+            // 6. Initialize back to top button
+            initBackToTop();
+            
+            // 7. Initialize email subscription
+            initEmailSubscription();
+            
+            // 8. Set up event listeners
             setupEventListeners();
             
             console.log('✅ AIABW Hub Ready!');
+            
+            // Track GA page view
+            trackEvent('Page', 'View', 'Homepage');
         }
         
         function setupEventListeners() {
@@ -2831,6 +3018,9 @@
                     // Filter tools
                     currentCategory = btn.getAttribute('data-category');
                     filterTools();
+                    
+                    // Track GA event
+                    trackEvent('Filter', 'Category', currentCategory);
                 });
             });
             
@@ -2841,6 +3031,9 @@
                     currentSort = e.target.value;
                     sortTools();
                     renderTools();
+                    
+                    // Track GA event
+                    trackEvent('Filter', 'Sort', currentSort);
                 });
             }
             
@@ -2853,6 +3046,9 @@
                         const targetElement = document.getElementById(targetId);
                         if (targetElement) {
                             targetElement.scrollIntoView({ behavior: 'smooth' });
+                            
+                            // Track GA event
+                            trackEvent('Navigation', 'Scroll to', targetId);
                         }
                     }
                 });
@@ -2863,6 +3059,9 @@
                 if (e.target.closest('.visit-btn')) {
                     const url = e.target.closest('.visit-btn').href;
                     console.log('Outbound click tracked:', url);
+                    
+                    // Track GA event
+                    trackEvent('Outbound', 'Click', url);
                     
                     // Save to localStorage for analytics
                     const clicks = JSON.parse(localStorage.getItem('aiabw_clicks') || '[]');
